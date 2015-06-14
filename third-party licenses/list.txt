@@ -1,1 +1,2 @@
+marked: https://github.com/chjj/marked
 nw.js: https://github.com/nwjs/nw.js

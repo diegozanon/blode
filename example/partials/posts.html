@@ -1,0 +1,70 @@
+<div ng-controller="PostsController">
+  <div ng-show="active.all || active.angular" class="row">
+    <div class="col-md-offset-1 col-md-10">
+      <article>
+        <div class="date">
+          JUL 05, 2015
+        </div>
+        <h2><a href="/">Angular Single-Page Applications and SEO</a></h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed felis eu nibh accumsan maximus a eget dolor. Sed quis odio aliquet, aliquam lorem eu, commodo tellus. Donec varius scelerisque lacus a finibus. Fusce ut maximus nibh. Etiam tellus velit, dignissim id nisl at, bibendum congue tortor …</p>
+        <button ng-click="filter('angular');" type="button" class="btn tag pull-right">Angular</button>              
+      </article>
+    </div>                       
+  </div> 
+
+  <div ng-show="active.all || active.angular" class="row">
+    <div class="col-md-offset-1 col-md-10">
+      <article>
+        <div class="date">
+          JUN 02, 2015
+        </div>
+        <h2><a href="/">A simple example of Angular directives</a></h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed felis eu nibh accumsan maximus a eget dolor. Sed quis odio aliquet, aliquam lorem eu, commodo tellus. Donec varius scelerisque lacus a finibus. Fusce ut maximus nibh. Etiam tellus velit, dignissim id nisl at, bibendum congue tortor …</p>
+        <button ng-click="filter('angular');" type="button" class="btn tag pull-right">Angular</button>  
+      </article>
+    </div>                       
+  </div>  
+
+  <div ng-show="active.all || active.node || active.mongodb" class="row">
+    <div class="col-md-offset-1 col-md-10">
+      <article>
+        <div class="date">
+          APR 07, 2015
+        </div>
+        <h2><a href="/">Retrieving data from MongoDB using Node</a></h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed felis eu nibh accumsan maximus a eget dolor. Sed quis odio aliquet, aliquam lorem eu, commodo tellus. Donec varius scelerisque lacus a finibus. Fusce ut maximus nibh. Etiam tellus velit, dignissim id nisl at, bibendum congue tortor …</p>
+        <button ng-click="filter('node');" type="button" class="btn tag pull-right">Node</button>  
+        <button ng-click="filter('mongodb');" type="button" class="btn tag pull-right">MongoDB</button>
+      </article>
+    </div>                       
+  </div>         
+
+  <div ng-show="active.all || active.node" class="row">
+    <div class="col-md-offset-1 col-md-10">
+      <article>
+        <div class="date">
+          MAR 13, 2015
+        </div>
+        <h2><a href="/">An intro to NW.js (former node-webkit)</a></h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed felis eu nibh accumsan maximus a eget dolor. Sed quis odio aliquet, aliquam lorem eu, commodo tellus. Donec varius scelerisque lacus a finibus. Fusce ut maximus nibh. Etiam tellus velit, dignissim id nisl at, bibendum congue tortor …</p>
+        <button ng-click="filter('node');" type="button" class="btn tag pull-right">Node</button>  
+      </article>
+    </div>                       
+  </div>      
+
+  <div ng-show="active.all || active.aws" class="row">
+    <div class="col-md-offset-1 col-md-10">
+      <article>
+        <div class="date">
+          FEB 18, 2015
+        </div>
+        <h2><a href="/">Serving gzipped files in Amazon CloudFront</a></h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed felis eu nibh accumsan maximus a eget dolor. Sed quis odio aliquet, aliquam lorem eu, commodo tellus. Donec varius scelerisque lacus a finibus. Fusce ut maximus nibh. Etiam tellus velit, dignissim id nisl at, bibendum congue tortor …</p>
+        <button ng-click="filter('aws');" type="button" class="btn tag pull-right">AWS</button>  
+      </article>
+    </div>                       
+  </div>               
+
+  <div class="row">
+  </div>
+</div>        

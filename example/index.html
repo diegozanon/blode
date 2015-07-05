@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="zanonApp">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A blog with tutorials and snippets of Angular, Node, MongoDB and AWS.">
+    <meta name="keywords" content="AngularJS, Node.js, MongoDB, AWS">
+    <meta name="author" content="Diego Zanon">    
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     
     <title>zanon.io</title>
@@ -19,11 +22,11 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body ng-controller="MainController">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h1 class="site-name"><a href="/about">zanon.io</a></h1>
+          <h1 class="site-name"><a href="#/about">zanon.io</a></h1>
         </div>
       </div>    
     </div>
@@ -40,11 +43,11 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">All posts</a></li>
-            <li><a href="#about">Angular</a></li>
-            <li><a href="#contact">Node</a></li>
-            <li><a href="#contact">MongoDB</a></li>
-            <li><a href="#contact">AWS</a></li>            
+            <li ng-class="{ 'active': active.all }">    <a ng-click="filter('all');"      href="#/">All posts</a></li>
+            <li ng-class="{ 'active': active.angular }"><a ng-click="filter('angular');"  href="#/">Angular</a></li>
+            <li ng-class="{ 'active': active.node }">   <a ng-click="filter('node');"     href="#/">Node</a></li>
+            <li ng-class="{ 'active': active.mongodb }"><a ng-click="filter('mongodb');"  href="#/">MongoDB</a></li>
+            <li ng-class="{ 'active': active.aws }">    <a ng-click="filter('aws');"      href="#/">AWS</a></li>            
           </ul>
         </div><!--/.nav-collapse -->      
       </nav>   
@@ -52,82 +55,19 @@
 
     <div class="container">   
       <div class="content">
-
-        <div class="row">
-          <div class="col-md-offset-1 col-md-10">
-            <article>
-              <div class="date">
-                JUL 05, 2015
-              </div>
-              <h2><a href="/">Angular Single-Page Applications and SEO</a></h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed felis eu nibh accumsan maximus a eget dolor. Sed quis odio aliquet, aliquam lorem eu, commodo tellus. Donec varius scelerisque lacus a finibus. Fusce ut maximus nibh. Etiam tellus velit, dignissim id nisl at, bibendum congue tortor …</p>
-              <button type="button" class="btn tag pull-right">Angular</button>              
-            </article>
-          </div>                       
-        </div> 
-
-        <div class="row">
-          <div class="col-md-offset-1 col-md-10">
-            <article>
-              <div class="date">
-                JUN 02, 2015
-              </div>
-              <h2><a href="/">A simple example of Angular directives</a></h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed felis eu nibh accumsan maximus a eget dolor. Sed quis odio aliquet, aliquam lorem eu, commodo tellus. Donec varius scelerisque lacus a finibus. Fusce ut maximus nibh. Etiam tellus velit, dignissim id nisl at, bibendum congue tortor …</p>
-              <button type="button" class="btn tag pull-right">Angular</button>  
-            </article>
-          </div>                       
-        </div>  
-
-        <div class="row">
-          <div class="col-md-offset-1 col-md-10">
-            <article>
-              <div class="date">
-                APR 07, 2015
-              </div>
-              <h2><a href="/">Retrieving data from MongoDB using Node</a></h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed felis eu nibh accumsan maximus a eget dolor. Sed quis odio aliquet, aliquam lorem eu, commodo tellus. Donec varius scelerisque lacus a finibus. Fusce ut maximus nibh. Etiam tellus velit, dignissim id nisl at, bibendum congue tortor …</p>
-              <button type="button" class="btn tag pull-right">Node</button>  
-              <button type="button" class="btn tag pull-right">MongoDB</button>
-            </article>
-          </div>                       
-        </div>         
-
-        <div class="row">
-          <div class="col-md-offset-1 col-md-10">
-            <article>
-              <div class="date">
-                MAR 13, 2015
-              </div>
-              <h2><a href="/">An intro to NW.js (former node-webkit)</a></h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed felis eu nibh accumsan maximus a eget dolor. Sed quis odio aliquet, aliquam lorem eu, commodo tellus. Donec varius scelerisque lacus a finibus. Fusce ut maximus nibh. Etiam tellus velit, dignissim id nisl at, bibendum congue tortor …</p>
-              <button type="button" class="btn tag pull-right">Node</button>  
-            </article>
-          </div>                       
-        </div>      
-
-        <div class="row">
-          <div class="col-md-offset-1 col-md-10">
-            <article>
-              <div class="date">
-                FEB 18, 2015
-              </div>
-              <h2><a href="/">Serving gzipped files in Amazon CloudFront</a></h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed felis eu nibh accumsan maximus a eget dolor. Sed quis odio aliquet, aliquam lorem eu, commodo tellus. Donec varius scelerisque lacus a finibus. Fusce ut maximus nibh. Etiam tellus velit, dignissim id nisl at, bibendum congue tortor …</p>
-              <button type="button" class="btn tag pull-right">AWS</button>  
-            </article>
-          </div>                       
-        </div>               
-
-        <div class="row">
-        </div>
+        <div class="ng-view-background" ng-view></div>
       </div>    
     </div>    
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
-
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>    
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-route.min.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/routes.js"></script>
   </body>
 </html>

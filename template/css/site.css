@@ -8,6 +8,16 @@ body {
 	color: white;
 }
 
+.header-img {
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+.header-img img {
+	width: 39px;
+	height: 39px;
+}
+
 #nav {
 	background-color: #333;
 }

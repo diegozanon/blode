@@ -1,6 +1,7 @@
 var ctrls = angular.module('zanonControllers', []);
 
-ctrls.controller('MainController', ['$scope', function($scope) {
+ctrls.controller('MainController', function($scope, $location, $rootScope) {
+
 	$scope.active = {
 		all: true,
 		angular: false,
@@ -16,8 +17,7 @@ ctrls.controller('MainController', ['$scope', function($scope) {
 
 		$scope.active[filter] = true;
 	};
-}]);
+});
 
 // Empty controllers
 ctrls.controller('PostsController', ['$scope', function($scope) {}]);
-

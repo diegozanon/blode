@@ -26,6 +26,10 @@ body {
 	background-color: #4472B9;
 }
 
+.center {
+	text-align: center;
+}
+
 .content {
 	background-color: #eee;	
 	min-height: calc(100vh - 119px); /* 119px is title + nav*/

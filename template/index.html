@@ -31,7 +31,7 @@
               <a href="#/">zanon.io</a>
             </h1>
           </div>
-          <div class="hidden-xs col-md-8 ">
+          <div class="hidden-xs col-md-8">
             <!-- empty -->
           </div>         
           <div class="col-xs-2 col-md-1 header-img">
@@ -49,15 +49,33 @@
 
       <script type="text/ng-template" id="modal.html">
         <div class="modal-header">
-          <h3 class="modal-title">About me</h3>
+          <h3 class="modal-title">You can find more about me on:</h3>
         </div>
-        <a href="http://stackoverflow.com/users/1476885/zanon?tab=profile">
-          <img 
-            src="http://stackexchange.com/users/flair/1594304.png?theme=clean" 
-            width="208" height="58" 
-            alt="profile for Zanon on Stack Exchange, a network of free, community-driven Q&amp;A sites"
-            title="profile for Zanon on Stack Exchange, a network of free, community-driven Q&amp;A sites">
-        </a>              
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-4 col-sm-3 col-md-2 center">
+              <h4>Stack Overflow</h4>
+              <a href="http://stackoverflow.com/users/1476885/zanon?tab=profile">
+                <img 
+                  src="http://stackexchange.com/users/flair/1594304.png?theme=clean" 
+                  width="208" height="58" alt="Stack Overflow" title="Stack Overflow">
+              </a>
+            </div>
+            <div class="col-xs-4 col-sm-3 col-md-2 center">
+              <h4>GitHub</h4>
+              <a href="https://github.com/zanon-io">
+                <img src="images/octocat.png" alt="GitHub" title="GitHub">
+              </a>  
+            </div>
+            <div class="col-xs-4 col-sm-3 col-md-2 center">
+              <h4>Twitter</h4>
+              <a href="https://twitter.com/zanon_io">
+                <img src="images/twitter.png" alt="Twitter" title="Twitter">
+              </a>  
+            </div>
+          </div>
+          <br>
+        </div>
         <div class="modal-footer">
           <p><button type="form" class="btn btn-primary" ng-click="close()">Close</button></p>         
         </div>

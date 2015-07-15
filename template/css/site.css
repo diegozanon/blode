@@ -66,3 +66,9 @@ article a:hover {
 	width: 77px;
 	padding: 0px;
 }
+
+@media print {
+  header {
+    display: none;
+  }
+}

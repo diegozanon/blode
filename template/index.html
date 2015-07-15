@@ -23,86 +23,88 @@
   </head>
   <body ng-controller="MainController">
 
-    <div ng-controller="HeaderController">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-8 col-md-2">
-            <h1 class="site-name">
-              <a href="#/">zanon.io</a>
-            </h1>
-          </div>
-          <div class="hidden-xs col-md-8">
-            <!-- empty -->
-          </div>         
-          <div class="col-xs-2 col-md-1 header-img">
-            <a href="" ng-click="about()">
-              <img src="images/about.png"/>
-            </a>
-          </div>      
-          <div class="col-xs-2 col-md-1 header-img">
-            <a href="#/">
-              <img src="images/rss.png"/>
-            </a>
-          </div> 
-        </div>         
-      </div>  
-
-      <script type="text/ng-template" id="modal.html">
-        <div class="modal-header">
-          <h3 class="modal-title">You can find more about me on:</h3>
-        </div>
+    <header>
+      <div ng-controller="HeaderController">
         <div class="container">
           <div class="row">
-            <div class="col-xs-4 col-sm-3 col-md-2 center">
-              <h4>Stack Overflow</h4>
-              <a href="http://stackoverflow.com/users/1476885/zanon?tab=profile">
-                <img 
-                  src="http://stackexchange.com/users/flair/1594304.png?theme=clean" 
-                  width="208" height="58" alt="Stack Overflow" title="Stack Overflow">
+            <div class="col-xs-8 col-md-2">
+              <h1 class="site-name">
+                <a href="#/">zanon.io</a>
+              </h1>
+            </div>
+            <div class="hidden-xs col-md-8">
+              <!-- empty -->
+            </div>         
+            <div class="col-xs-2 col-md-1 header-img">
+              <a href="" ng-click="about()">
+                <img src="images/about.png"/>
               </a>
-            </div>
-            <div class="col-xs-4 col-sm-3 col-md-2 center">
-              <h4>GitHub</h4>
-              <a href="https://github.com/zanon-io">
-                <img src="images/octocat.png" alt="GitHub" title="GitHub">
-              </a>  
-            </div>
-            <div class="col-xs-4 col-sm-3 col-md-2 center">
-              <h4>Twitter</h4>
-              <a href="https://twitter.com/zanon_io">
-                <img src="images/twitter.png" alt="Twitter" title="Twitter">
-              </a>  
-            </div>
-          </div>
-          <br>
-        </div>
-        <div class="modal-footer">
-          <p><button type="form" class="btn btn-primary" ng-click="close()">Close</button></p>         
-        </div>
-      </script>   
-    </div>
+            </div>      
+            <div class="col-xs-2 col-md-1 header-img">
+              <a href="#/">
+                <img src="images/rss.png"/>
+              </a>
+            </div> 
+          </div>         
+        </div>  
 
-    <div class="container">
-      <nav id="nav" class="navbar-inverse navbar-static-top">      
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li ng-class="{ 'active': active.all }">    <a ng-click="filter('all');"      href="#/">All posts</a></li>
-            <li ng-class="{ 'active': active.angular }"><a ng-click="filter('angular');"  href="#/">Angular</a></li>
-            <li ng-class="{ 'active': active.node }">   <a ng-click="filter('node');"     href="#/">Node</a></li>
-            <li ng-class="{ 'active': active.mongodb }"><a ng-click="filter('mongodb');"  href="#/">MongoDB</a></li>
-            <li ng-class="{ 'active': active.aws }">    <a ng-click="filter('aws');"      href="#/">AWS</a></li>            
-          </ul>
-        </div><!--/.nav-collapse -->      
-      </nav>   
-    </div>
+        <script type="text/ng-template" id="modal.html">
+          <div class="modal-header">
+            <h3 class="modal-title">You can find more about me on:</h3>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-4 col-sm-3 col-md-2 center">
+                <h4>Stack Overflow</h4>
+                <a href="http://stackoverflow.com/users/1476885/zanon?tab=profile">
+                  <img 
+                    src="http://stackexchange.com/users/flair/1594304.png?theme=clean" 
+                    width="208" height="58" alt="Stack Overflow" title="Stack Overflow">
+                </a>
+              </div>
+              <div class="col-xs-4 col-sm-3 col-md-2 center">
+                <h4>GitHub</h4>
+                <a href="https://github.com/zanon-io">
+                  <img src="images/octocat.png" alt="GitHub" title="GitHub">
+                </a>  
+              </div>
+              <div class="col-xs-4 col-sm-3 col-md-2 center">
+                <h4>Twitter</h4>
+                <a href="https://twitter.com/zanon_io">
+                  <img src="images/twitter.png" alt="Twitter" title="Twitter">
+                </a>  
+              </div>
+            </div>
+            <br>
+          </div>
+          <div class="modal-footer">
+            <p><button type="form" class="btn btn-primary" ng-click="close()">Close</button></p>         
+          </div>
+        </script>   
+      </div>
+
+      <div class="container">
+        <nav id="nav" class="navbar-inverse navbar-static-top">      
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li ng-class="{ 'active': active.all }">    <a ng-click="filter('all');"      href="#/">All posts</a></li>
+              <li ng-class="{ 'active': active.angular }"><a ng-click="filter('angular');"  href="#/">Angular</a></li>
+              <li ng-class="{ 'active': active.node }">   <a ng-click="filter('node');"     href="#/">Node</a></li>
+              <li ng-class="{ 'active': active.mongodb }"><a ng-click="filter('mongodb');"  href="#/">MongoDB</a></li>
+              <li ng-class="{ 'active': active.aws }">    <a ng-click="filter('aws');"      href="#/">AWS</a></li>            
+            </ul>
+          </div><!--/.nav-collapse -->      
+        </nav>   
+      </div>
+    </header>
 
     <div class="container">   
       <div class="content">

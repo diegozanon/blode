@@ -1,6 +1,6 @@
 var ctrls = angular.module('zanonControllers', []);
 
-ctrls.controller('MainController', function($scope, $location, $rootScope) {
+ctrls.controller('MainController', function($scope) {
 
 	$scope.active = {
 		all: true,
@@ -19,5 +19,9 @@ ctrls.controller('MainController', function($scope, $location, $rootScope) {
 	};
 });
 
+ctrls.controller('404Controller', function() {
+	initInvaders404();
+});
+
 // Empty controllers
-ctrls.controller('PostsController', ['$scope', function($scope) {}]);
+ctrls.controller('PostsController', function() {});

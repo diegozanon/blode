@@ -8,7 +8,8 @@ angular.module('zanonApp').config(['$routeProvider', '$locationProvider',
         controller: 'PostsController'
       }).	
       when('/404', {
-        templateUrl: 'partials/404.html'
+        templateUrl: 'partials/404.html',
+        controller: '404Controller'
       }).		  
 
       // posts

@@ -69,33 +69,9 @@ article a:hover {
 
 /* 404 page style */
 
-.ctn {
-	width: 600px;
-	height: 400px;
-	position: relative;
-}
-
-#splash {
-	position: absolute;
-	width: 600px;
-	height: 400px;
-	top: 0;
-	left:0;
-	background-image: url('../images/fernetjs-invaders.png');
-	opacity: 0;
-	display:none;
-	z-index: 2;
-	text-align: right;
-	float: right;
-}
-
-#splash a {
-	font-family: Verdana;
-	font-size: 12pt;
-	text-decoration: none;
-	color: #323330;
-	margin: 40px;
-	line-height: 4;
+.game-ctn {
+	width: 60%;
+	text-align: center;
 }
 
 #game-canvas {
@@ -103,7 +79,30 @@ article a:hover {
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	border: 1px solid silver;
-	background-color:#000;
+	background-color:#222;
+	width: 100%;
+}
+
+#splash {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left:0;
+	background-image: url('../images/fernetjs-invaders.png');
+	background-size: 100% 100%;
+	opacity: 0;
+	display:none;
+	z-index: 2;
+	text-align: right;
+	float: right;	
+}
+
+#splash a {
+	font-size: 3vw;
+	text-decoration: none;
+	color: #323330;
+	margin-right: 5%;
 }
 
 @media print {

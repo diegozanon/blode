@@ -71,16 +71,9 @@ article a:hover {
 
 .game-ctn {
 	width: 60%;
-	text-align: center;
-}
-
-#game-canvas {
-	border-radius: 10px;
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
-	border: 1px solid silver;
-	background-color:#222;
-	width: 100%;
+	position: relative;
+	display: block;
+    margin: 0 auto;	
 }
 
 #splash {
@@ -103,6 +96,16 @@ article a:hover {
 	text-decoration: none;
 	color: #323330;
 	margin-right: 5%;
+}
+
+#game-canvas {
+	width: 100%;
+	margin-top: 10px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border: 1px solid silver;
+	background-color:#222;
 }
 
 @media print {

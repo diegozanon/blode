@@ -39,6 +39,14 @@ body {
 	height: 40px;
 }
 
+.content h1, .content h2, .content h3 {
+	margin: 0px;
+}
+
+.content {
+	padding: 0px 15px;
+}
+
 article {
 	background-color: white;
 	padding: 40px;

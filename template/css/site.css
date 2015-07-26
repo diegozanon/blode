@@ -39,7 +39,7 @@ body {
 	height: 40px;
 }
 
-.content h1, .content h2, .content h3 {
+.content h1, .content h3 {
 	margin: 0px;
 }
 
@@ -61,6 +61,14 @@ article a {
 article a:hover { 
 	text-decoration: none;
     color: #4472B9;
+}
+
+article > h2 {
+	margin: 10px 0px;
+}
+
+article > p {
+	font-size: 16px;
 }
 
 .date {

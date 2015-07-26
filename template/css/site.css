@@ -3,6 +3,8 @@ body {
 	font-family: 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
 }
 
+/* Header */
+
 .site-name>a {
 	text-decoration: none;
 	color: white;
@@ -25,6 +27,20 @@ body {
 #nav .active>a {
 	background-color: #4472B9;
 }
+
+/* Modal */
+
+.btn {
+	color: white;
+	background-color: #4472B9;
+	border-color: #2e6da4;
+}
+
+.btn:hover {
+	color: white;
+}
+
+/* Main page */
 
 .center {
 	text-align: center;

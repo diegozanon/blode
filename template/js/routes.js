@@ -16,8 +16,8 @@ angular.module('zanonApp').config(['$routeProvider', '$locationProvider',
       when('/angular-single-page-application-and-seo', {
         templateUrl: 'posts/2015-07-05-angular-single-page-application-and-seo.html'
       }).
-      when('/a-simple-example-of-angular-directives', {
-        templateUrl: 'posts/2015-06-02-a-simple-example-of-angular-directives.html'
+      when('/angular-directives-a-direct-and-simple-guide', {
+        templateUrl: 'posts/2015-06-02-angular-directives-a-direct-and-simple-guide.html'
       }).
       when('/retrieving-data-from-mongodb-using-node', {
         templateUrl: 'posts/2015-04-07-retrieving-data-from-mongodb-using-node.html'

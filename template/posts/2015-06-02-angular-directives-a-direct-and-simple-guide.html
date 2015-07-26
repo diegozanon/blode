@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-md-offset-1 col-md-10 post">
+  	<h1>Angular Directives: a direct and simple guide</h1>
+  	<p class="date">JUN 02, 2015</p>
+
+  	<div>
+    	
+  
+<h2 id="what-is-a-directive-">What is a Directive?</h2>
+<p>A directive is a marker that you will add to your HTML code to attach a specific behavior. This marker can be an element, attribute, class or comment. Let&#39;s try this with an element mark. If you need to create an accordion for your Angular app, you could do the following:</p>
+<pre><code class="lang-html">&lt;accordion&gt;
+    &lt;div&gt;My collapsible content&lt;/div&gt;
+&lt;/accordion&gt;
+</code></pre>
+<p>The <code>&lt;accordion&gt;</code> element is your directive. The next step is to add your desired behavior. In this case, we&#39;ll add a toggle button and show/hide the element when we click on it.</p>
+<pre><code class="lang-javascript">angular.module(&#39;myApp&#39;, [])
+    .directive(&#39;accordion&#39;, function() {
+        return {
+            transclude: true,
+            template: &#39;&lt;input type=&quot;button&quot; value=&quot;Toggle&quot;&gt;&lt;ng-transclude/&gt;&#39;,
+            link: function(scope, elem, attrs) {
+                elem.find(&#39;input&#39;).bind(&#39;click&#39;, function() {
+                    elem.find(&#39;ng-transclude&#39;).toggleClass(&#39;hidden&#39;);
+                });
+            }
+        };
+    });
+</code></pre>
+<p>With this, you&#39;ll get the following: [plunker]</p>
+<p>//Example</p>
+<p>In this example, we used the following elements inside the directive:</p>
+<ul>
+<li><code>transclude: true</code> - this tells Angular that you want to use the content inside your directive inside your your directive template.</li>
+<li><code>template</code> - this is the HTML content that you will append inside your directive. In this case, we added an input button and the <code>&lt;ng-transclude/&gt;</code> element that marks where the original content will be placed.</li>
+<li><code>link</code> - this is where you will add your directive behavior. You can use <a href="https://docs.angularjs.org/api/ng/function/angular.element">jqLite</a> that is a subset of jQuery. It has less features than jQuery to enforce better practices. For example, you should not manipulate DOM elements that are out of your directive scope.</li>
+</ul>
+<h2 id="more">More</h2>
+<p>OK, now you are ready to learn more advanced features. So you can do this following those tutorials:</p>
+<p><a href="http://www.sitepoint.com/practical-guide-angularjs-directives/">http://www.sitepoint.com/practical-guide-angularjs-directives/</a><br>
+<a href="https://egghead.io/articles/an-introduction-to-the-angularjs-directive-part-1">https://egghead.io/articles/an-introduction-to-the-angularjs-directive-part-1</a><br>
+<a href="https://docs.angularjs.org/guide/directive">https://docs.angularjs.org/guide/directive</a></p>
+
+
+    </div>
+  </div>
+</div>

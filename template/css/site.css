@@ -178,6 +178,26 @@ iframe {
 	background-color:#222;
 }
 
+/* media queries */
+
+@media all and (max-width: 767px) {
+  h1 {
+  	font-size: 26px;
+  }
+
+  h2 {
+  	font-size: 24px;
+  }
+  
+  pre, .post > div, article > p {
+	font-size: 13px;
+  }
+  
+  article > p {
+	font-size: 13px;
+  }
+}
+
 @media print {
   header {
     display: none;

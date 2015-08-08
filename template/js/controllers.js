@@ -7,7 +7,9 @@ ctrls.controller('MainController', function($scope) {
 		angular: false,
 		node: false,
 		mongodb: false,
-		aws: false
+		aws: false,
+		android: false,
+		ios: false
 	};
 
 	$scope.filter = function(filter) {

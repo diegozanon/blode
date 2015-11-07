@@ -1,8 +1,2 @@
-src/.idea/.name
-src/.idea/encodings.xml
-src/.idea/modules.xml
-src/.idea/vcs.xml
-src/.idea/src.iml
-src/.idea/scopes/scope_settings.xml
-src/.idea/workspace.xml
-src/.idea/misc.xml
+.idea
+src/node_modules

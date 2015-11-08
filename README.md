@@ -25,10 +25,16 @@ If you are still here and want to try blode, follow the configuration steps belo
 
 ## Configuration
 
-The first time that you run blode, you'll need to configure the following:
+You need to create a config.json file at the same level of app.js with the following:
 
-- The **input** and **output** folders.
-- Tags that you want to filter
+```json
+{
+  "directory" : "your_directory",
+  "awsAccessKeyId" : "your_access_key",
+  "awsSecretAccessKey" : "your_secret_key",
+  "awsBucketName" : "your_aws_bucket_name"
+}
+```
 
 ## Blog posts
 

@@ -2,10 +2,8 @@ var initializer = require("./lib/initializer");
 
 function main() {
 
-    initializer.validateArguments();
-    var directory = initializer.getDirectory();
     var config = initializer.getConfig();
-
+    initializer.validate(config); // throws an error if invalid
 }
 
 main();

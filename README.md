@@ -18,6 +18,7 @@ If you are still here and want to try blode, follow the configuration steps belo
 - Adds blog posts filters by tags
 - Minifies CSS/JS
 - gzip and upload to Amazon S3
+- Updates the RSS file
 
 ## Installing
 

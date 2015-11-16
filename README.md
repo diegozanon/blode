@@ -22,9 +22,11 @@ If you are still here and want to try blode, follow the configuration steps belo
 
 ## Installing
 
-// todo
+// TODO
 
 ## Configuration
+
+// TODO
 
 You need to create a config.json file at the same level of app.js with the following:
 
@@ -47,6 +49,8 @@ blode requires three things:
 - The third line must have one or more tags that will be attached to the blog. E.g.: angularjs, javascript
 
 ## How to use
+
+// TODO
 
 1. When you run blode for the first time, it will create 4 folders for you - js, css, images and markdown - in the **input** folder.
 2. Place your content in the correspondent folders.

@@ -1,7 +1,6 @@
 var chai = require('chai');
 var expect = chai.expect;
 var chaiDatetime = require('chai-datetime');
-var sinon = require('sinon');
 var constants = require('../lib/constants');
 var initializer = require('../lib/initializer');
 var markdowner = require('../lib/markdowner');
@@ -17,7 +16,6 @@ chai.use(chaiDatetime);
 
 exports.chai = chai;
 exports.expect = expect;
-exports.sinon = sinon;
 exports.constants = constants;
 exports.initializer = initializer;
 exports.markdowner = markdowner;

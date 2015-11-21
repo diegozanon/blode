@@ -1,0 +1,7 @@
+[aws-sdk](https://github.com/aws/aws-sdk-js)  
+[chai](https://github.com/chaijs/chai)  
+[chai-datetime](https://github.com/mguterl/chai-datetime)  
+[jshint](https://github.com/jshint/jshint)  
+[marked](https://github.com/chjj/marked)  
+[mocha](https://github.com/mochajs/mocha)  
+[q](https://github.com/kriskowal/q)

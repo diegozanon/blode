@@ -1,22 +1,26 @@
-var constants = require('../lib/constants');
-var config = require('../config');
+var constants = require('./constants');
 
-exports.validateArguments = function() {
-    var nbOfArgs = process.argv.length;
+exports.getConfig = function() {
 
-    if(nbOfArgs > 3) { // Usage: node app.js [directory]
-        throw constants.MSG_ERROR_ARGS;
+    try {
+        return require('../config');
+    }
+    catch (e) {
+        console.error(constants.MSG_ERROR_CONFIG_NOT_FOUND);
+        throw e;
     }
 };
 
-exports.getDirectory = function() {
+exports.validate = function(config) {
 
-    var defaultDir = __dirname;
-    var fixedDefaultDir = defaultDir.substr(0, defaultDir.lastIndexOf("\\")); // removing "\lib" from __dirname
-    return process.argv[2] || fixedDefaultDir; // return fixedDefaultDir only if there is no third argument
-};
+    if(!config.directory ||
+        !config.awsAccessKeyId ||
+        !config.awsSecretAccessKey ||
+        !config.awsBucketName) {
 
-exports.getConfig = function() {
-    // TODO: validate
-    return config;
+        throw constants.MSG_ERROR_INVALID_CONFIG;
+    }
+    else {
+        return true;
+    }
 };

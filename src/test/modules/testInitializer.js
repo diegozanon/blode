@@ -5,48 +5,41 @@ var initializer = common.initializer;
 
 describe('initializer', function() {
 
-    describe('#validateArguments()', function() {
-
-        it('should reject more than 3 command line arguments', function() {
-
-            process.argv = ["node", "app.js", "directory", "invalid"];
-            var errorMsg = constants.MSG_ERROR_ARGS;
-
-            expect(initializer.validateArguments).to.throw(errorMsg);
-        });
-    });
-
-    describe('#getDirectory()', function() {
-
-        it('should retrieve local if it has just 2 command line arguments', function() {
-
-            process.argv = ["node", "app.js"];
-            var actualDir = initializer.getDirectory();
-            var defaultDir = __dirname;
-            var partiallyAdjustedDir = defaultDir.substr(0, defaultDir.lastIndexOf("\\")); // removing "modules" folder
-            var expectedDir = partiallyAdjustedDir.substr(0, partiallyAdjustedDir.lastIndexOf("\\")); // removing "test" folder
-
-            expect(actualDir).equal(expectedDir);
-        });
-    });
-
-    describe('#getDirectory()', function() {
-
-        it('should use input folder if it is passes as a command line argument', function() {
-
-            var expectedDir = "C:\\temp";
-            process.argv = ["node", "app.js", expectedDir];
-            var actualDir = initializer.getDirectory();
-
-            expect(actualDir).equal(expectedDir);
-        });
-    });
-
     describe('#getConfig()', function() {
 
+        it('should not throw error if file exist', function() {
+
+            expect(initializer.getConfig).to.be.ok;
+        });
+    });
+
+    describe('#validate()', function() {
+
         it('should validate if all options are available', function() {
-            // TODO: test
-            initializer.getConfig();
+
+            var tests = [
+                { config : { directory : 'a', awsAccessKeyId : 'b', awsSecretAccessKey : 'c', awsBucketName : 'd'}, valid : true},
+                { config : { directory : 'a', awsAccessKeyId : 'b', awsSecretAccessKey : 'c'}, valid : false},
+                { config : { directory : 'a', awsAccessKeyId : 'b', awsBucketName : 'd'}, valid : false},
+                { config : { directory : 'a', awsSecretAccessKey : 'c', awsBucketName : 'd'}, valid : false},
+                { config : { awsAccessKeyId : 'b', awsSecretAccessKey : 'c', awsBucketName : 'd'}, valid : false},
+                { config : { }, valid : false}
+            ];
+
+            tests.forEach(function(test){
+
+                if (test.valid) {
+                    expect(initializer.validate(test.config)).to.be.ok;
+                }
+                else {
+
+                    var validate = function() {
+                        initializer.validate(test.config)
+                    };
+
+                    expect(validate).to.throw(constants.MSG_ERROR_INVALID_CONFIG);
+                }
+            });
         });
     });
 });

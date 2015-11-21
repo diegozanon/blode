@@ -65,3 +65,9 @@ define(
     'Uploading to S3.'
 );
 
+/* File names */
+
+define(
+    'FILE_POST',
+    '\\templates\\post.jade'
+);

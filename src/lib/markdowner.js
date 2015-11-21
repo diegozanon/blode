@@ -1,10 +1,31 @@
+var jade = require('jade');
 var constants = require('./constants');
+var utils = require('./utils');
 
-exports.markdown = function(callback) {
+exports.markdown = function(config, callback) {
 
-    console.log(constants.MSG_DEBUG_MARKDOWNER);
+    var postFileName = config.directory + constants.FILE_POST;
+
+    var options = {
+        pretty : true
+    };
+
+    var locals = {
+        post : {
+            title : 'a',
+            date : 'b',
+            content : 'c'
+        }
+    };
+
+    jade.renderFile(postFileName, utils.mergeJSON(options, locals), function(err, html) {
+
+        if(err)
+             callback(err);
+
+        console.log(html);
 
 
-
-    callback(null);
+        callback(null);
+    });
 };

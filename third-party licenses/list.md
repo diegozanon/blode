@@ -1,6 +1,7 @@
 [aws-sdk](https://github.com/aws/aws-sdk-js)  
 [chai](https://github.com/chaijs/chai)  
 [chai-datetime](https://github.com/mguterl/chai-datetime)  
+[jade](https://github.com/jadejs/jade)  
 [jshint](https://github.com/jshint/jshint)  
 [marked](https://github.com/chjj/marked)  
 [mocha](https://github.com/mochajs/mocha)  

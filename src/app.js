@@ -24,23 +24,30 @@ function main() {
 
     console.log(constants.MSG_DEBUG_START);
 
-    markdown()
+    console.log(constants.MSG_DEBUG_MARKDOWNER);
+    markdown(config)
         .then(function () {
+            console.log(constants.MSG_DEBUG_POSTSLIST);
             return writePostsList();
         })
         .then(function () {
+            console.log(constants.MSG_DEBUG_ROUTES);
             return writeRoutes();
         })
         .then(function () {
+            console.log(constants.MSG_DEBUG_RSS);
             return writeRss();
         })
         .then(function () {
+            console.log(constants.MSG_DEBUG_FILEMAP);
             return writeFilemap();
         })
         .then(function () {
+            console.log(constants.MSG_DEBUG_PRERENDER);
             return prerender();
         })
         .then(function () {
+            console.log(constants.MSG_DEBUG_UPLOADER);
             return uploadToS3();
         })
         .done(function () {

@@ -36,8 +36,8 @@ define(
 );
 
 define(
-    'MSG_DEBUG_POSTSINDEX',
-    'Writing posts index file.'
+    'MSG_DEBUG_POSTSLIST',
+    'Writing posts list file.'
 );
 
 define(

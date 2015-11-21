@@ -2,7 +2,7 @@ var Q = require('q');
 var constants = require("./lib/constants");
 var initializer = require("./lib/initializer");
 var markdowner = require("./lib/markdowner");
-var postsIndexWriter = require("./lib/postsIndexWriter");
+var postsListWriter = require("./lib/postsListWriter");
 var routesWriter = require("./lib/routesWriter");
 var rssWriter = require("./lib/rssWriter");
 var filemapWriter = require("./lib/filemapWriter");
@@ -10,7 +10,7 @@ var prerenderer = require("./lib/prerenderer");
 var S3uploader = require("./lib/S3uploader");
 
 var markdown = Q.denodeify(markdowner.markdown);
-var writePostsIndex = Q.denodeify(postsIndexWriter.writePostsIndex);
+var writePostsList = Q.denodeify(postsListWriter.writePostsList);
 var writeRoutes = Q.denodeify(routesWriter.writeRoutes);
 var writeRss = Q.denodeify(rssWriter.writeRss);
 var writeFilemap = Q.denodeify(filemapWriter.writeFilemap);
@@ -26,7 +26,7 @@ function main() {
 
     markdown()
         .then(function () {
-            return writePostsIndex();
+            return writePostsList();
         })
         .then(function () {
             return writeRoutes();

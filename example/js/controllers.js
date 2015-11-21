@@ -1,15 +1,11 @@
-var ctrls = angular.module('zanonControllers', []);
+var ctrls = angular.module('exampleControllers', []);
 
 ctrls.controller('MainController', function($scope) {
 
 	$scope.active = {
 		all: true,
-		angular: false,
-		node: false,
-		mongodb: false,
-		aws: false,
-		android: false,
-		ios: false
+		post1: false,
+		post2: false
 	};
 
 	$scope.filter = function(filter) {
@@ -19,10 +15,6 @@ ctrls.controller('MainController', function($scope) {
 
 		$scope.active[filter] = true;
 	};
-});
-
-ctrls.controller('404Controller', function() {
-	initInvaders404();
 });
 
 // Empty controllers

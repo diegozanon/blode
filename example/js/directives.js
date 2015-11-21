@@ -1,4 +1,4 @@
-angular.module('zanonApp')
+angular.module('exampleApp')
   .directive('highlightCode', function() {
     return {
       restrict: "A",

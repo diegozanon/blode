@@ -36,6 +36,26 @@ define(
 );
 
 define(
+    'MSG_DEBUG_POSTSINDEX',
+    'Writing posts index file.'
+);
+
+define(
+    'MSG_DEBUG_ROUTES',
+    'Writing routes file.'
+);
+
+define(
+    'MSG_DEBUG_RSS',
+    'Writing RSS file.'
+);
+
+define(
+    'MSG_DEBUG_FILEMAP',
+    'Writing filemap.'
+);
+
+define(
     'MSG_DEBUG_PRERENDER',
     'Prerendering.'
 );

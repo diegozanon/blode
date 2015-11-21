@@ -1,6 +1,6 @@
 var constants = require('./constants');
 
-exports.upload = function(callback) {
+exports.uploadToS3 = function(callback) {
 
     console.log(constants.MSG_DEBUG_UPLOADER);
 

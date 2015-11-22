@@ -72,6 +72,11 @@ define(
     '\\templates'
 );
 
+define(
+    'FOLDER_RAW',
+    '\\raw'
+);
+
 /* File names */
 
 define(

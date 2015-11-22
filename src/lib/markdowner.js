@@ -18,14 +18,19 @@ exports.markdown = function(config, callback) {
         }
     };
 
-    jade.renderFile(postFileName, utils.mergeJSON(options, locals), function(err, html) {
+    utils.getPosts(config, function(err, posts) {
 
         if(err)
-             callback(err);
+            callback(err);
 
-        console.log(html);
+        console.log("Posts:" + posts);
 
+        jade.renderFile(postFileName, utils.mergeJSON(options, locals), function(err, html) {
 
-        callback(null);
+            if(err)
+                callback(err);
+
+            callback(null);
+        });
     });
 };

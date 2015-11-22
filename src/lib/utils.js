@@ -10,3 +10,8 @@ exports.mergeJSON = function(obj1, obj2) {
 
     return result;
 };
+
+exports.getPosts = function(config) {
+
+
+};

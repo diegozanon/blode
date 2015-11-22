@@ -1,0 +1,9 @@
+Title: Post1
+Summary: Summary of post1.
+Tags: Tag1
+Date: NOV 15, 2015
+URL: post1
+
+## Post1 Title
+
+[blode](https://github.com/zanon-io/blode) was created to automate the build of [zanon.io](http://zanon.io)

@@ -1,7 +1,20 @@
+var fs = require('fs');
 var jade = require('jade');
+var marked = require('marked');
 var Q = require('q');
 var constants = require('./constants');
 var utils = require('./utils');
+
+marked.setOptions({
+    renderer: new marked.Renderer(),
+    gfm: true,
+    tables: true,
+    breaks: false,
+    pedantic: false,
+    sanitize: false,
+    smartLists: true,
+    smartypants: false
+});
 
 exports.markdown = function(config, callback) {
 
@@ -18,6 +31,8 @@ exports.markdown = function(config, callback) {
 
         Q.all(posts.map(function(post) {
 
+            post.content = marked(post.content);
+
             var locals = {
                 post : post
             };
@@ -26,11 +41,18 @@ exports.markdown = function(config, callback) {
 
             return Q.nfcall(jade.renderFile, postFileName, jadeArgs)
                 .then(function(html) {
-                    return html;
-                })
+
+                    var partialFileName =
+                      config.directory +
+                      constants.FOLDER_PARTIALS + '\\' +
+                      utils.extractDate(post.date) +
+                      '-' + post.url + '.html';
+
+                    return Q.nfcall(fs.writeFile, partialFileName, html)
+                });
         }))
-        .then(function(results) {
-            callback(null, results);
+        .then(function() {
+            callback(null);
         })
         .catch(function(err) {
             callback(err);

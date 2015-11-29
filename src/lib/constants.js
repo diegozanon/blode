@@ -87,6 +87,11 @@ define(
     '\\raw'
 );
 
+define(
+    'FOLDER_PARTIALS',
+    '\\partials'
+);
+
 /* File names */
 
 define(

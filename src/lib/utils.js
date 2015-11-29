@@ -56,7 +56,7 @@ function extractPostData(fileName, fileContents) {
         title : lines[0].replace('Title:', '').trim(),
         summary : lines[1].replace('Summary:', '').trim(),
         tags : lines[2].replace('Tags:', '').trim(),
-        date : extractDate(lines[3].replace('Date:', '').trim()),
+        date : lines[3].replace('Date:', '').trim(),
         url : lines[4].replace('URL:', '').trim(),
         content : content.replace(/[\r]/g, '\n').trim()
     };
@@ -64,13 +64,11 @@ function extractPostData(fileName, fileContents) {
     return postData;
 }
 
-function extractDate(dateStr) {
+exports.extractDate = function(dateStr) {
 
     // Format e.g.: Nov 08, 2015
     var dateConverted = moment(dateStr, 'MMM DD, yyyy').format().toString();
 
-    // Remove timezone and add UTC
-    dateConverted = dateConverted.substring(0, 10) + 'T00:00:00Z';
-
-    return dateConverted;
+    // Remove timezone and return
+    return dateConverted.substring(0, 10);
 }

@@ -9,6 +9,7 @@ var filemapWriter = require("./lib/filemapWriter");
 var prerenderer = require("./lib/prerenderer");
 var S3uploader = require("./lib/S3uploader");
 
+// Create Promises
 var markdown = Q.denodeify(markdowner.markdown);
 var writePostsList = Q.denodeify(postsListWriter.writePostsList);
 var writeRoutes = Q.denodeify(routesWriter.writeRoutes);
@@ -17,42 +18,41 @@ var writeFilemap = Q.denodeify(filemapWriter.writeFilemap);
 var prerender = Q.denodeify(prerenderer.prerender);
 var uploadToS3 = Q.denodeify(S3uploader.uploadToS3);
 
-function main() {
+// Validate configuration
+var config = initializer.getConfig();
+initializer.validate(config); // throws an error if invalid
 
-    var config = initializer.getConfig();
-    initializer.validate(config); // throws an error if invalid
 
-    console.log(constants.MSG_DEBUG_START);
-
-    console.log(constants.MSG_DEBUG_MARKDOWNER);
-    markdown(config)
-        .then(function () {
-            console.log(constants.MSG_DEBUG_POSTSLIST);
-            return writePostsList();
-        })
-        .then(function () {
-            console.log(constants.MSG_DEBUG_ROUTES);
-            return writeRoutes();
-        })
-        .then(function () {
-            console.log(constants.MSG_DEBUG_RSS);
-            return writeRss();
-        })
-        .then(function () {
-            console.log(constants.MSG_DEBUG_FILEMAP);
-            return writeFilemap();
-        })
-        .then(function () {
-            console.log(constants.MSG_DEBUG_PRERENDER);
-            return prerender();
-        })
-        .then(function () {
-            console.log(constants.MSG_DEBUG_UPLOADER);
-            return uploadToS3();
-        })
-        .done(function () {
-            console.log(constants.MSG_DEBUG_FINISH);
-        });
-}
-
-main();
+console.log(constants.MSG_DEBUG_START);
+console.log(constants.MSG_DEBUG_MARKDOWNER);
+markdown(config)
+  .then(function () {
+    console.log(constants.MSG_DEBUG_POSTSLIST);
+    return writePostsList();
+  })
+  .then(function () {
+    console.log(constants.MSG_DEBUG_ROUTES);
+    return writeRoutes();
+  })
+  .then(function () {
+    console.log(constants.MSG_DEBUG_RSS);
+    return writeRss();
+  })
+  .then(function () {
+    console.log(constants.MSG_DEBUG_FILEMAP);
+    return writeFilemap();
+  })
+  .then(function () {
+    console.log(constants.MSG_DEBUG_PRERENDER);
+    return prerender();
+  })
+  .then(function () {
+    console.log(constants.MSG_DEBUG_UPLOADER);
+    return uploadToS3();
+  })
+  .catch(function (err) {
+    console.error(err);
+  })
+  .done(function () {
+    console.log(constants.MSG_DEBUG_FINISH);
+  });

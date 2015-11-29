@@ -6,16 +6,26 @@ function define(name, value) {
     });
 }
 
+define(
+    'MSG_DOC_REPO',
+    'Follow the documentation available at: https://github.com/zanon-io/blode'
+);
+
 /* ERROR MSGs */
 
 define(
     'MSG_ERROR_CONFIG_NOT_FOUND',
-    'config.json not found in root directory or it could not be loaded. \nFollow the documentation available at: https://github.com/zanon-io/blode'
+    'config.json not found in root directory or it could not be loaded.\n' + this.MSG_DOC_REPO
 );
 
 define(
     'MSG_ERROR_INVALID_CONFIG',
-    'config.json doesn\'t have all required configuration. \nFollow the documentation available at: https://github.com/zanon-io/blode'
+    'config.json doesn\'t have all required configuration.\n' + this.MSG_DOC_REPO
+);
+
+define(
+    'MSG_ERROR_INVALID_RAW',
+    'Raw file "{0}" is invalid.\n' + this.MSG_DOC_REPO
 );
 
 /* DEBUG MSGs */

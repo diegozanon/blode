@@ -30,14 +30,17 @@ describe('utils', function() {
 
     describe('#getPosts()', function() {
 
-        it('should find posts and return its contents', function() {
+        it('should find posts and return its contents', function(done) {
 
             var expectedPosts = postsData.posts();
 
-            var actualPosts = utils.getPosts(config);
+            utils.getPosts(config, function(err, actualPosts) {
 
-            expect(actualPosts.length).to.be.equal(expectedPosts.length);
-            expect(JSON.stringify(actualPosts)).to.be.equal(JSON.stringify(expectedPosts));
+                expect(actualPosts.length).to.be.equal(expectedPosts.length);
+                expect(JSON.stringify(actualPosts)).to.be.equal(JSON.stringify(expectedPosts));
+
+                done();
+            });
         });
     });
 });

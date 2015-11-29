@@ -1,4 +1,5 @@
 var jade = require('jade');
+var Q = require('q');
 var constants = require('./constants');
 var utils = require('./utils');
 
@@ -6,31 +7,33 @@ exports.markdown = function(config, callback) {
 
     var postFileName = config.directory + constants.FILE_POST;
 
-    var options = {
-        pretty : true
-    };
-
-    var locals = {
-        post : {
-            title : 'a',
-            date : 'b',
-            content : 'c'
-        }
-    };
-
     utils.getPosts(config, function(err, posts) {
 
         if(err)
             callback(err);
 
-        console.log("Posts:" + posts);
+        var options = {
+            pretty : true
+        };
 
-        jade.renderFile(postFileName, utils.mergeJSON(options, locals), function(err, html) {
+        Q.all(posts.map(function(post) {
 
-            if(err)
-                callback(err);
+            var locals = {
+                post : post
+            };
 
-            callback(null);
+            var jadeArgs = utils.mergeJSON(options, locals);
+
+            return Q.nfcall(jade.renderFile, postFileName, jadeArgs)
+                .then(function(html) {
+                    return html;
+                })
+        }))
+        .then(function(results) {
+            callback(null, results);
+        })
+        .catch(function(err) {
+            callback(err);
         });
     });
 };

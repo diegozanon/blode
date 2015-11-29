@@ -1,5 +1,7 @@
-var Q = require('q');
 var fs = require('fs');
+var moment = require('moment');
+var path = require('path');
+var Q = require('q');
 var constants = require('./constants');
 
 exports.mergeJSON = function(obj1, obj2) {
@@ -17,27 +19,58 @@ exports.mergeJSON = function(obj1, obj2) {
 
 exports.getPosts = function(config, callback) {
 
-    var path = config.directory + constants.FOLDER_RAW;
+    var rawDir = config.directory + constants.FOLDER_RAW;
 
-    /*Q.nfcall(fs.readdir, path)
-        .then(function(files) {
-            return Q.all(files.map(function(file) {
-                return readDir(p.join(path, file));
-            }))
-            .then(function(results) {
-                return [].concat.apply([], results);
-            });
-        })
-        .then(function() {
-            callback();
-        });
-    */
+    Q.nfcall(fs.readdir, rawDir)
+    .then(function(files) {
 
-    /*fs.readdir(path, function(err, files) {
-        if(err)
-            callback(err);
-
-
-
-    });*/
+        return Q.all(files.map(function(file) {
+            var fullPath = rawDir + '\\' + file;
+            return Q.nfcall(fs.readFile, fullPath, 'utf8')
+                .then(function(fileContents) {
+                    return extractPostData(file, fileContents);
+                })
+        }))
+    })
+    .then(function(results) {
+        callback(null, results);
+    })
+    .catch(function (err) {
+        callback(err);
+    });
 };
+
+function extractPostData(fileName, fileContents) {
+
+    var lines = fileContents.toString().split('\n');
+
+    if(lines.length < 6)
+        throw constants.MSG_ERROR_INVALID_RAW.replace('{0}', fileName);
+
+    var content = '';
+    for (var i = 5; i < lines.length; i++) {
+        content += lines[i];
+    }
+
+    var postData = {
+        title : lines[0].replace('Title:', '').trim(),
+        summary : lines[1].replace('Summary:', '').trim(),
+        tags : lines[2].replace('Tags:', '').trim(),
+        date : extractDate(lines[3].replace('Date:', '').trim()),
+        url : lines[4].replace('URL:', '').trim(),
+        content : content.replace(/[\r]/g, '\n').trim()
+    };
+
+    return postData;
+}
+
+function extractDate(dateStr) {
+
+    // Format e.g.: Nov 08, 2015
+    var dateConverted = moment(dateStr, 'MMM DD, yyyy').format().toString();
+
+    // Remove timezone and add UTC
+    dateConverted = dateConverted.substring(0, 10) + 'T00:00:00Z';
+
+    return dateConverted;
+}

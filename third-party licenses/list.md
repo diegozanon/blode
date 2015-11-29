@@ -5,4 +5,5 @@
 [jshint](https://github.com/jshint/jshint)  
 [marked](https://github.com/chjj/marked)  
 [mocha](https://github.com/mochajs/mocha)  
+[moment[(https://github.com/moment/moment)  
 [q](https://github.com/kriskowal/q)

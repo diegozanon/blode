@@ -1,0 +1,17 @@
+div(ng-controller="PostsController")
+  each post in posts
+    div(ng-show="active.all#{ post.showTags }" class="row")
+      div(class="col-md-offset-1 col-md-10")
+        article
+          div(class="date")
+            = post.date
+          h2
+            a(href="/posts/#{ post.url }")
+              = post.title
+          p
+            = post.summary
+          each filter in post.filters
+            button(ng-click="filter('#{ filter.toLowerCase() }');" type="button" class="btn tag pull-right")
+              = filter
+
+  div(class="row")

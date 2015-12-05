@@ -1,32 +1,32 @@
-<div ng-controller="PostsController">
 
+<div ng-controller="PostsController">
   <div ng-show="active.all || active.tag1 || active.tag2" class="row">
     <div class="col-md-offset-1 col-md-10">
       <article>
-        <div class="date">
-          NOV 21, 2015
+        <div class="date">NOV 21, 2015
         </div>
         <h2><a href="/posts/post2">Post2</a></h2>
-        <p>Summary of post2.</p>
-        <button ng-click="filter('tag1');" type="button" class="btn tag pull-right">Tag1</button>
-        <button ng-click="filter('tag2');" type="button" class="btn tag pull-right">Tag2</button>
+        <p>Summary of post2.
+        </p>
+        <button ng-click="filter('tag1');" type="button" class="btn tag pull-right">Tag1
+        </button>
+        <button ng-click="filter('tag2');" type="button" class="btn tag pull-right">Tag2
+        </button>
       </article>
     </div>
   </div>
-
   <div ng-show="active.all || active.tag1" class="row">
     <div class="col-md-offset-1 col-md-10">
       <article>
-        <div class="date">
-          NOV 15, 2015
+        <div class="date">NOV 15, 2015
         </div>
         <h2><a href="/posts/post1">Post1</a></h2>
-        <p>Summary of post1.</p>
-        <button ng-click="filter('tag1');" type="button" class="btn tag pull-right">Tag1</button>
+        <p>Summary of post1.
+        </p>
+        <button ng-click="filter('tag1');" type="button" class="btn tag pull-right">Tag1
+        </button>
       </article>
-    </div>                       
+    </div>
   </div>
-
-  <div class="row">
-  </div>
-</div>        
+  <div class="row"></div>
+</div>

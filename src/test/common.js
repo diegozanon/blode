@@ -33,7 +33,6 @@ exports.readOneFile = function(fileName, callback) {
         if(err)
           callback(err);
 
-        removeCarriageReturn(contents);
         callback(err, contents);
     });
 }
@@ -50,13 +49,7 @@ exports.readTwoFiles = function(file1, file2, callback) {
             if(err)
               callback(err);
 
-            removeCarriageReturn(contents1);
-            removeCarriageReturn(contents2);
             callback(err, [contents1, contents2]);
         });
     });
-}
-
-function removeCarriageReturn(str) {
-    str = str.replace(/[\r\n]/g, '\n');
 }

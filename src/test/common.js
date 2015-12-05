@@ -13,6 +13,7 @@ exports.prerenderer = require('../lib/prerenderer');
 exports.S3uploader = require('../lib/S3uploader');
 exports.postsData = require('./testData/postsData');
 exports.partialsData = require('./testData/partialsData');
+exports.postsHtmlData = require('./testData/postsHtmlData');
 
 var fs = require('fs');
 var path = require('path');
@@ -23,16 +24,39 @@ var config = {
 
 exports.config = config;
 
-exports.readTwoFiles = function(file1, file2, callback) {
+var enconding = 'utf8';
 
-    fs.readFile(file1, 'utf8', function(err, contents1) {
+exports.readOneFile = function(fileName, callback) {
+
+    fs.readFile(fileName, enconding, function(err, contents) {
 
         if(err)
-            callback(err);
+          callback(err);
 
-        fs.readFile(file2, 'utf8', function(err, contents2) {
+        removeCarriageReturn(contents);
+        callback(err, contents);
+    });
+}
 
+exports.readTwoFiles = function(file1, file2, callback) {
+
+    fs.readFile(file1, enconding, function(err, contents1) {
+
+        if(err)
+          callback(err);
+
+        fs.readFile(file2, enconding, function(err, contents2) {
+
+            if(err)
+              callback(err);
+
+            removeCarriageReturn(contents1);
+            removeCarriageReturn(contents2);
             callback(err, [contents1, contents2]);
         });
     });
-};
+}
+
+function removeCarriageReturn(str) {
+    str = str.replace(/[\r\n]/g, '\n');
+}

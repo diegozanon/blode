@@ -6,8 +6,8 @@ exports.posts = function() {
     var summary2 = 'Summary of post2.';
     var tags1 = 'Tag1';
     var tags2 = 'Tag1, Tag2';
-    var date1 = 'Nov 15, 2015';
-    var date2 = 'Nov 21, 2015';
+    var date1 = 'NOV 15, 2015';
+    var date2 = 'NOV 21, 2015';
     var url1 = 'post1';
     var url2 = 'post2';
     var content1 = '## Post1 Title\n\n[blode](https://github.com/zanon-io/blode) was created to automate the build of [zanon.io](http://zanon.io)';
@@ -31,7 +31,5 @@ exports.posts = function() {
         content : content2
     };
 
-    var expectedPosts = [post1, post2];
-
-    return expectedPosts;
-};
+    return [post1, post2];
+}

@@ -87,7 +87,7 @@ function extractPostData(fileName, fileContents) {
         tags : lines[2].replace('Tags:', '').trim(),
         date : lines[3].replace('Date:', '').trim(),
         url : lines[4].replace('URL:', '').trim(),
-        content : content.replace(/[\r]/g, '\n').trim()
+        content : content.replace(/[\r\n]/g, '\n').trim()
     };
 
     return postData;

@@ -40,6 +40,15 @@ exports.getPosts = function(config, callback) {
     });
 };
 
+exports.extractDate = function(dateStr) {
+
+    // Format e.g.: Nov 08, 2015
+    var dateConverted = moment(dateStr, 'MMM DD, YYYY').format().toString();
+
+    // Remove timezone and return
+    return dateConverted.substring(0, 10);
+};
+
 function extractPostData(fileName, fileContents) {
 
     var lines = fileContents.toString().split('\n');
@@ -62,13 +71,4 @@ function extractPostData(fileName, fileContents) {
     };
 
     return postData;
-}
-
-exports.extractDate = function(dateStr) {
-
-    // Format e.g.: Nov 08, 2015
-    var dateConverted = moment(dateStr, 'MMM DD, yyyy').format().toString();
-
-    // Remove timezone and return
-    return dateConverted.substring(0, 10);
-}
+};

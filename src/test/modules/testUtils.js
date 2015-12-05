@@ -43,4 +43,21 @@ describe('utils', function() {
             });
         });
     });
+
+    describe('#extractDate()', function() {
+
+        it('should convert dates correctly', function() {
+
+            var tests = [
+                  { value: 'Nov 08, 2015', expected: new Date('2015-11-08') },
+                  { value: 'Jan 8, 2014', expected: new Date('2014-01-08') },
+                  { value: 'DEC 25, 2013', expected: new Date('2013-12-25') }
+            ];
+
+            tests.forEach(function(test){
+                var actual = new Date(utils.extractDate(test.value));
+                expect(actual).to.equalDate(test.expected);
+            });
+        });
+    });
 });

@@ -1,4 +1,5 @@
 var fs = require('fs');
+var jade = require('jade');
 var moment = require('moment');
 var path = require('path');
 var Q = require('q');
@@ -15,7 +16,7 @@ exports.mergeJSON = function(obj1, obj2) {
         result[key] = obj2[key];
 
     return result;
-};
+}
 
 exports.getPosts = function(config, callback) {
 
@@ -38,7 +39,7 @@ exports.getPosts = function(config, callback) {
     .catch(function (err) {
         callback(err);
     });
-};
+}
 
 exports.extractDate = function(dateStr) {
 
@@ -48,6 +49,25 @@ exports.extractDate = function(dateStr) {
     // Remove timezone and return
     return dateConverted.substring(0, 10);
 };
+
+exports.renderWithJade = function(files, jadeTemplate, callback) {
+
+    Q.all(files.map(function(file) {
+
+        var jadeArgs = exports.mergeJSON(constants.JADE_OPTIONS, file.locals);
+
+        return Q.nfcall(jade.renderFile, jadeTemplate, jadeArgs)
+            .then(function(html) {
+                return Q.nfcall(fs.writeFile, file.name, html)
+            });
+    }))
+    .then(function() {
+        callback(null);
+    })
+    .catch(function(err) {
+        callback(err);
+    });
+}
 
 function extractPostData(fileName, fileContents) {
 
@@ -71,4 +91,4 @@ function extractPostData(fileName, fileContents) {
     };
 
     return postData;
-};
+}

@@ -60,4 +60,8 @@ describe('utils', function() {
             });
         });
     });
+
+    describe('#renderWithJade()', function() {
+        // already tested when called by testMarkdowner and others
+    });
 });

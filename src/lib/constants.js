@@ -30,7 +30,9 @@ define('FOLDER_RAW', '\\raw');
 define('FOLDER_PARTIALS', '\\partials');
 
 /* File names */
-define('FILE_POST', this.FOLDER_TEMPLATES + '\\post.jade');
+define('FILE_JADE_POST', this.FOLDER_TEMPLATES + '\\post.jade');
+define('FILE_JADE_POSTLIST', this.FOLDER_TEMPLATES + '\\postList.jade');
+define('FILE_HTML_POSTS', this.FOLDER_PARTIALS + '\\posts.html');
 
 /* Configs */
 define('JADE_OPTIONS', { pretty : true });

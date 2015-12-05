@@ -1,4 +1,5 @@
 var common = require("../common");
+var Q = require('q');
 var config = common.config;
 var constants = common.constants;
 var expect = common.expect;
@@ -12,44 +13,31 @@ describe('markdowner', function() {
 
         it('should parse files and output the results following the template', function(done) {
 
-            markdowner.markdown(config, function(err) {
+            var partials = Q.denodeify(partialsData.partials);
+            var markdown = Q.denodeify(markdowner.markdown);
+            var readTwoFiles = Q.denodeify(common.readTwoFiles);
 
-                if(err) throw err;
+            var expectedPartials = partials();
 
-                getDataToCompare(function(err, actualPartials, expectedPartials) {
+            var actualPartials =
+              markdown(config)
+              .then(function() {
 
-                    if(err) throw err;
+                  var partialsDir = path.join(config.directory, constants.FOLDER_PARTIALS);
+                  var pathPartial1 = partialsDir + '\\2015-11-15-post1.html';
+                  var pathPartial2 = partialsDir + '\\2015-11-21-post2.html';
 
-                    expect(actualPartials.length).to.be.equal(expectedPartials.length);
-                    expect(actualPartials).to.be.deep.equal(expectedPartials);
+                  return readTwoFiles(pathPartial1, pathPartial2);
+              });
 
-                    done();
-                });
-            });
+            Q.all([expectedPartials, actualPartials])
+              .spread(function(expected, actual) {
+                  expect(actual.length).to.be.equal(expected.length);
+                  expect(actual).to.be.deep.equal(expected);
+              })
+              .done(function() {
+                  done();
+              });
         });
     });
 });
-
-function getDataToCompare(callback) {
-
-  partialsData.partials(function(err, expectedPartials) {
-
-      if(err) callback(err);
-
-      getActualPartials(function(err, actualPartials) {
-
-          callback(err, actualPartials, expectedPartials);
-      });
-  });
-};
-
-function getActualPartials(callback) {
-
-    var partialsDir = path.join(config.directory, constants.FOLDER_PARTIALS);
-    var pathPartial1 = partialsDir + '\\2015-11-15-post1.html';
-    var pathPartial2 = partialsDir + '\\2015-11-21-post2.html';
-
-    common.readTwoFiles(pathPartial1, pathPartial2, function(err, actualPartials) {
-        callback(err, actualPartials);
-    });
-};

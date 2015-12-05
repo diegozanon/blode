@@ -1,7 +1,5 @@
 var fs = require('fs');
-var jade = require('jade');
 var marked = require('marked');
-var Q = require('q');
 var constants = require('./constants');
 var utils = require('./utils');
 
@@ -18,44 +16,31 @@ marked.setOptions({
 
 exports.markdown = function(config, callback) {
 
-    var postFileName = config.directory + constants.FILE_POST;
+    var jadeTemplate = config.directory + constants.FILE_JADE_POST;
+    var partialsFolder = config.directory + constants.FOLDER_PARTIALS;
 
     utils.getPosts(config, function(err, posts) {
 
         if(err)
             callback(err);
 
-        var options = {
-            pretty : true
-        };
-
-        Q.all(posts.map(function(post) {
-
+        var files = [];
+        posts.forEach(function(post) {
             post.content = marked(post.content);
 
-            var locals = {
-                post : post
+            var postDate = utils.extractDate(post.date)
+            var fileName = postDate + '-' + post.url + '.html';
+
+            var file = {
+                locals: { post: post },
+                name: partialsFolder + '\\' + fileName
             };
 
-            var jadeArgs = utils.mergeJSON(options, locals);
+            files.push(file);
+        });
 
-            return Q.nfcall(jade.renderFile, postFileName, jadeArgs)
-                .then(function(html) {
-
-                    var partialFileName =
-                      config.directory +
-                      constants.FOLDER_PARTIALS + '\\' +
-                      utils.extractDate(post.date) +
-                      '-' + post.url + '.html';
-
-                    return Q.nfcall(fs.writeFile, partialFileName, html)
-                });
-        }))
-        .then(function() {
-            callback(null);
-        })
-        .catch(function(err) {
-            callback(err);
+        utils.renderWithJade(files, jadeTemplate, function(err) {
+            callback(err, posts);
         });
     });
 };

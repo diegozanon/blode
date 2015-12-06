@@ -41,7 +41,7 @@ exports.getPosts = function(config, callback) {
     });
 }
 
-exports.extractDate = function(dateStr) {
+exports.extractIsoDate = function(dateStr) {
 
     // Format e.g.: Nov 08, 2015
     var dateConverted = moment(dateStr, 'MMM DD, YYYY').format().toString();

@@ -44,9 +44,9 @@ describe('utils', function() {
         });
     });
 
-    describe('#extractDate()', function() {
+    describe('#extractIsoDate()', function() {
 
-        it('should convert dates correctly', function() {
+        it('should convert string dates to ISO format', function() {
 
             var tests = [
                   { value: 'Nov 08, 2015', expected: new Date('2015-11-08') },
@@ -55,7 +55,7 @@ describe('utils', function() {
             ];
 
             tests.forEach(function(test){
-                var actual = new Date(utils.extractDate(test.value));
+                var actual = new Date(utils.extractIsoDate(test.value));
                 expect(actual).to.equalDate(test.expected);
             });
         });

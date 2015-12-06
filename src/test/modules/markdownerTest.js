@@ -24,10 +24,10 @@ describe('markdowner', function() {
               .then(function() {
 
                   var partialsDir = path.join(config.directory, constants.FOLDER_PARTIALS);
-                  var pathPartial1 = partialsDir + '\\2015-11-15-post1.html';
-                  var pathPartial2 = partialsDir + '\\2015-11-21-post2.html';
+                  var partialPath1 = partialsDir + '\\2015-11-15-post1.html';
+                  var partialPath2 = partialsDir + '\\2015-11-21-post2.html';
 
-                  return readTwoFiles(pathPartial1, pathPartial2);
+                  return readTwoFiles(partialPath1, partialPath2);
               });
 
             Q.all([expectedPartials, actualPartials])

@@ -6,9 +6,10 @@ exports.writePostsList = function(config, posts, callback) {
   var jadeTemplate = config.directory + constants.FILE_JADE_POSTLIST;
   var postsPath = config.directory + constants.FILE_HTML_POSTS;
 
-  posts.reverse(); // posts.htmls lists posts in reverse order
+  var postsReversed = posts.slice(); // create another copy
+  postsReversed.reverse(); // posts.htmls lists posts in reverse order
 
-  posts.forEach(function(post) {
+  postsReversed.forEach(function(post) {
       post.showTags = '';
       post.filters = [];
       post.tags.split(',').forEach(function(tag) {
@@ -18,11 +19,11 @@ exports.writePostsList = function(config, posts, callback) {
   });
 
   var file = [{
-      locals: { posts: posts },
+      locals: { posts: postsReversed },
       name: postsPath
   }];
 
   utils.renderWithJade(file, jadeTemplate, function(err) {
       callback(err, posts);
   });
-};
+}

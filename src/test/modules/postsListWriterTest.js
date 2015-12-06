@@ -28,9 +28,9 @@ describe('postsListWriter', function() {
               })
               .then(function() {
                   var postsDir = path.join(config.directory, constants.FOLDER_PARTIALS);
-                  var pathPosts = postsDir + '\\posts.html';
+                  var postsPath = postsDir + '\\posts.html';
 
-                  return readOneFile(pathPosts);
+                  return readOneFile(postsPath);
               });
 
             Q.all([expectedPostsHtml, actualPostsHtml])

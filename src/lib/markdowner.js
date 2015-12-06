@@ -28,8 +28,8 @@ exports.markdown = function(config, callback) {
         posts.forEach(function(post) {
             post.content = marked(post.content);
 
-            var postDate = utils.extractDate(post.date)
-            var fileName = postDate + '-' + post.url + '.html';
+            var isoDate = utils.extractIsoDate(post.date);
+            var fileName = isoDate + '-' + post.url + '.html';
 
             var file = {
                 locals: { post: post },

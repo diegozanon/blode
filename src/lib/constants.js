@@ -25,14 +25,17 @@ define('MSG_DEBUG_PRERENDER', 'Prerendering.');
 define('MSG_DEBUG_UPLOADER', 'Uploading to S3.');
 
 /* Folders */
-define('FOLDER_TEMPLATES', '\\templates');
-define('FOLDER_RAW', '\\raw');
+define('FOLDER_JS', '\\js');
 define('FOLDER_PARTIALS', '\\partials');
+define('FOLDER_RAW', '\\raw');
+define('FOLDER_TEMPLATES', '\\templates');
 
 /* File names */
+define('FILE_HTML_POSTS', this.FOLDER_PARTIALS + '\\posts.html');
 define('FILE_JADE_POST', this.FOLDER_TEMPLATES + '\\post.jade');
 define('FILE_JADE_POSTLIST', this.FOLDER_TEMPLATES + '\\postList.jade');
-define('FILE_HTML_POSTS', this.FOLDER_PARTIALS + '\\posts.html');
+define('FILE_JS_ROUTES', this.FOLDER_JS + '\\routes.js');
+define('FILE_JS_ROUTES_TEMPLATE', this.FOLDER_TEMPLATES + '\\routes.js');
 
 /* Configs */
 define('JADE_OPTIONS', { pretty : true });

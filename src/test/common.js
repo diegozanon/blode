@@ -14,6 +14,7 @@ exports.S3uploader = require('../lib/S3uploader');
 exports.postsData = require('./testData/postsData');
 exports.partialsData = require('./testData/partialsData');
 exports.postsHtmlData = require('./testData/postsHtmlData');
+exports.routesData = require('./testData/routesData');
 
 var fs = require('fs');
 var path = require('path');

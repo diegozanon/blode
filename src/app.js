@@ -22,9 +22,9 @@ markdown(config)
     console.log(constants.MSG_DEBUG_POSTSLIST);
     return writePostsList(config, posts);
   })
-  .then(function () {
+  .then(function (posts) {
     console.log(constants.MSG_DEBUG_ROUTES);
-    return writeRoutes();
+    return writeRoutes(config, posts);
   })
   .then(function () {
     console.log(constants.MSG_DEBUG_RSS);

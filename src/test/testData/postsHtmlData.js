@@ -3,7 +3,7 @@ var path = require('path');
 
 exports.postsHtml = function(callback) {
 
-    var pathPosts = path.join(__dirname, './resources/posts.html');
+    var postsPath = path.join(__dirname, './resources/posts.html');
 
-    common.readOneFile(pathPosts, callback);
-};
+    common.readOneFile(postsPath, callback);
+}

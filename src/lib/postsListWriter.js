@@ -13,8 +13,10 @@ exports.writePostsList = function(config, posts, callback) {
       post.showTags = '';
       post.filters = [];
       post.tags.split(',').forEach(function(tag) {
-          post.showTags += ' || active.' + tag.trim().toLowerCase();
-          post.filters.push(tag.trim());
+          if(tag) {
+              post.showTags += ' || active.' + tag.trim().toLowerCase();
+              post.filters.push(tag.trim());
+          }
       });
   });
 

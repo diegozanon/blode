@@ -50,7 +50,7 @@ exports.extractIsoDate = function(dateStr) {
 exports.extractLongDate = function(dateStr) {
 
     // Input: NOV 08, 2015 - Output: Sun, 08 Nov 2015 00:00:00 UTC
-    return moment(dateStr, 'MMM DD, YYYY').format('ddd, DD MMM YYYY 00:00:00 UTC').toString();
+    return moment(dateStr, 'MMM DD, YYYY').format('ddd, DD MMM YYYY 00:00:00 +0000').toString();
 }
 
 exports.renderWithJade = function(files, jadeTemplate, callback) {

@@ -66,9 +66,9 @@ describe('utils', function() {
         it('should convert string dates to long format', function() {
 
             var tests = [
-                  { value: 'Nov 08, 2015', expected: 'Sun, 08 Nov 2015 00:00:00 UTC' },
-                  { value: 'Jan 8, 2014', expected: 'Wed, 08 Jan 2014 00:00:00 UTC' },
-                  { value: 'DEC 25, 2013', expected: 'Wed, 25 Dec 2013 00:00:00 UTC' }
+                  { value: 'Nov 08, 2015', expected: 'Sun, 08 Nov 2015 00:00:00 +0000' },
+                  { value: 'Jan 8, 2014', expected: 'Wed, 08 Jan 2014 00:00:00 +0000' },
+                  { value: 'DEC 25, 2013', expected: 'Wed, 25 Dec 2013 00:00:00 +0000' }
             ];
 
             tests.forEach(function(test){

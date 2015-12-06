@@ -20,6 +20,7 @@ exports.rssData = require('./testData/rssData');
 
 var fs = require('fs');
 var path = require('path');
+var Q = require('q');
 
 var config = {
     directory : path.join(__dirname, '../../example')
@@ -54,5 +55,16 @@ exports.readTwoFiles = function(file1, file2, callback) {
 
             callback(err, [contents1, contents2]);
         });
+    });
+}
+
+exports.testWithPromises = function(promiseA, promiseB, test, done) {
+
+  Q.all([promiseA, promiseB])
+    .spread(function(resultA, resultB) {
+        test(resultA, resultB);
+    })
+    .done(function() {
+        done();
     });
 }

@@ -30,14 +30,12 @@ describe('markdowner', function() {
                   return readTwoFiles(partialPath1, partialPath2);
               });
 
-            Q.all([expectedPartials, actualPartials])
-              .spread(function(expected, actual) {
-                  expect(actual.length).to.be.equal(expected.length);
-                  expect(actual).to.be.deep.equal(expected);
-              })
-              .done(function() {
-                  done();
-              });
+            function test(expected, actual) {
+                expect(actual.length).to.be.equal(expected.length);
+                expect(actual).to.be.deep.equal(expected);
+            }
+
+            common.testWithPromises(expectedPartials, actualPartials, test, done);
         });
     });
 });

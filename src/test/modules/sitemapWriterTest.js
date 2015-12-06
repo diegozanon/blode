@@ -32,13 +32,11 @@ describe('sitemapWriter', function() {
                 return readOneFile(sitemapPath);
             });
 
-          Q.all([expectedFile, actualFile])
-            .spread(function(expected, actual) {
-                expect(actual).to.be.equal(expected);
-            })
-            .done(function() {
-                done();
-            });
+          function test(expected, actual) {
+              expect(actual).to.be.equal(expected);
+          }
+
+          common.testWithPromises(expectedFile, actualFile, test, done);
         });
     });
 });

@@ -32,13 +32,11 @@ describe('rssWriter', function() {
                 return readOneFile(rssPath);
             });
 
-          Q.all([expectedRss, actualRss])
-            .spread(function(expected, actual) {
-                expect(actual).to.be.equal(expected);
-            })
-            .done(function() {
-                done();
-            });
+          function test(expected, actual) {
+              expect(actual).to.be.equal(expected);
+          }
+
+          common.testWithPromises(expectedRss, actualRss, test, done);
         });
     });
 });

@@ -33,13 +33,11 @@ describe('routesWriter', function() {
                   return readOneFile(routesPath);
               });
 
-            Q.all([expectedRoutes, actualRoutes])
-              .spread(function(expected, actual) {
-                  expect(actual).to.be.equal(expected);
-              })
-              .done(function() {
-                  done();
-              });
+            function test(expected, actual) {
+                expect(actual).to.be.equal(expected);
+            }
+
+            common.testWithPromises(expectedRoutes, actualRoutes, test, done);
         });
     });
 });

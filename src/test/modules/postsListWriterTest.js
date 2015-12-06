@@ -33,13 +33,11 @@ describe('postsListWriter', function() {
                   return readOneFile(postsPath);
               });
 
-            Q.all([expectedPostsHtml, actualPostsHtml])
-              .spread(function(expected, actual) {
-                  expect(actual).to.be.equal(expected);
-              })
-              .done(function() {
-                  done();
-              });
+            function test(expected, actual) {
+                expect(actual).to.be.equal(expected);
+            }
+
+            common.testWithPromises(expectedPostsHtml, actualPostsHtml, test, done);
         });
     });
 });

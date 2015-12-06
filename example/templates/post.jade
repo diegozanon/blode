@@ -3,4 +3,5 @@ div(class="row")
         h1= post.title
         p(class="date")= post.date
         div
-            != post.content
+          = '\n\n'  
+          != post.content

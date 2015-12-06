@@ -7,7 +7,7 @@ var markdown = Q.denodeify(require("./lib/markdowner").markdown);
 var writePostsList = Q.denodeify(require("./lib/postsListWriter").writePostsList);
 var writeRoutes = Q.denodeify(require("./lib/routesWriter").writeRoutes);
 var writeRss = Q.denodeify(require("./lib/rssWriter").writeRss);
-var writeFilemap = Q.denodeify(require("./lib/filemapWriter").writeFilemap);
+var writeSitemap = Q.denodeify(require("./lib/sitemapWriter").writeSitemap);
 var prerender = Q.denodeify(require("./lib/prerenderer").prerender);
 var uploadToS3 = Q.denodeify(require("./lib/S3uploader").uploadToS3);
 
@@ -26,13 +26,13 @@ markdown(config)
     console.log(constants.MSG_DEBUG_ROUTES);
     return writeRoutes(config, posts);
   })
-  .then(function () {
+  .then(function (posts) {
     console.log(constants.MSG_DEBUG_RSS);
-    return writeRss();
+    return writeRss(config, posts);
   })
-  .then(function () {
-    console.log(constants.MSG_DEBUG_FILEMAP);
-    return writeFilemap();
+  .then(function (posts) {
+    console.log(constants.MSG_DEBUG_SITEMAP);
+    return writeSitemap(config, posts);
   })
   .then(function () {
     console.log(constants.MSG_DEBUG_PRERENDER);

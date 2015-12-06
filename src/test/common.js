@@ -8,13 +8,15 @@ exports.markdowner = require('../lib/markdowner');
 exports.postsListWriter = require('../lib/postsListWriter');
 exports.routesWriter = require('../lib/routesWriter');
 exports.rssWriter = require('../lib/rssWriter');
-exports.filemapWriter = require('../lib/filemapWriter');
+exports.sitemapWriter = require('../lib/sitemapWriter');
 exports.prerenderer = require('../lib/prerenderer');
 exports.S3uploader = require('../lib/S3uploader');
+exports.sitemapData = require('./testData/sitemapData');
 exports.postsData = require('./testData/postsData');
 exports.partialsData = require('./testData/partialsData');
 exports.postsHtmlData = require('./testData/postsHtmlData');
 exports.routesData = require('./testData/routesData');
+exports.rssData = require('./testData/rssData');
 
 var fs = require('fs');
 var path = require('path');

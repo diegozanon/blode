@@ -1,5 +1,5 @@
-var constants = require('./constants');
 var fs = require('fs');
+var constants = require('./constants');
 var utils = require('./utils');
 
 exports.writeRoutes = function(config, posts, callback) {

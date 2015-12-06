@@ -49,6 +49,7 @@ describe('utils', function() {
         it('should convert string dates to ISO format', function() {
 
             var tests = [
+                  { value: 'OCT 18, 2015', expected: new Date('2015-10-18') },
                   { value: 'Nov 08, 2015', expected: new Date('2015-11-08') },
                   { value: 'Jan 8, 2014', expected: new Date('2014-01-08') },
                   { value: 'DEC 25, 2013', expected: new Date('2013-12-25') }

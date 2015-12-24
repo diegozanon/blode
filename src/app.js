@@ -34,9 +34,9 @@ markdown(config)
     console.log(constants.MSG_DEBUG_SITEMAP);
     return writeSitemap(config, posts);
   })
-  .then(function () {
+  .then(function (posts) {
     console.log(constants.MSG_DEBUG_PRERENDER);
-    return prerender();
+    return prerender(posts);
   })
   .then(function () {
     console.log(constants.MSG_DEBUG_UPLOADER);

@@ -9,22 +9,33 @@ exports.prerender = function(config, posts, callback) {
 
   var args = getArguments(config, posts);
 
-  removePreviousPosts(config, function(err) {
+  // Create Promises
+  var removePreviousPostsP = Q.denodeify(removePreviousPosts);
+  var prerenderPagesP = Q.denodeify(prerenderPages);
 
-    if (err)
-      callback(err);
-
-    Q.all(args.map(function(arg) {
-        return Q.nfcall(execPhantom, arg.pageName, arg.outputFile, arg.outputPath);
-    }))
-    .then(function() {
-        callback(null);
+  removePreviousPostsP(config)
+    .then(function () {
+      return prerenderPagesP(args);
     })
-    .catch(function(err) {
-        callback(err);
+    .catch(function (err) {
+      callback(err);
+    })
+    .done(function () {
+      callback();
     });
-  });
 };
+
+function prerenderPages(args, callback) {
+  Q.all(args.map(function(arg) {
+      return Q.nfcall(execPhantom, arg.pageName, arg.outputFile, arg.outputPath);
+  }))
+  .then(function() {
+      callback(null);
+  })
+  .catch(function(err) {
+      callback(err);
+  });
+}
 
 function execPhantom(pageName, outputFile, outputPath, callback) {
 
@@ -56,9 +67,26 @@ function getArguments(config, posts) {
     args.push(arg);
   });
 
+  var index = {
+    pageName: constants.STAGING_HOSTED_URL,
+    outputFile: 'index.html',
+    outputPath: config.directory + constants.FOLDER_PRERENDERED
+  };
+
+  args.push(index);
+
+  var notFound = {
+    pageName: constants.STAGING_HOSTED_URL + '/' + 'page-that-does-not-exist',
+    outputFile: '404',
+    outputPath: config.directory + constants.FOLDER_PRERENDERED
+  };
+
+  args.push(notFound);
+
   return args;
 }
 
+// This is needed. Otherwise, phanthomjs will see the old version of the file instead of the new content
 function removePreviousPosts(config, callback) {
 
   var dir = config.directory + constants.FOLDER_POSTS;

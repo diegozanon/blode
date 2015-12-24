@@ -31,6 +31,7 @@ define('MSG_ERROR_INVALID_PHANTOM_ARGS', 'Arguments should be passed as: <script
 define('FOLDER_JS', '\\js');
 define('FOLDER_PARTIALS', '\\partials');
 define('FOLDER_POSTS', '\\posts');
+define('FOLDER_PRERENDERED', '\\prerendered');
 define('FOLDER_RAW', '\\raw');
 define('FOLDER_TEMPLATES', '\\templates');
 

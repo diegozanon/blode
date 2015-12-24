@@ -6,14 +6,6 @@ function define(name, value) {
     });
 }
 
-define('MSG_DOC_REPO', 'Follow the documentation available at: https://github.com/zanon-io/blode');
-
-/* ERROR MSGs */
-define('MSG_ERROR_CONFIG_NOT_FOUND', 'config.json not found in root directory or it could not be loaded.\n' + this.MSG_DOC_REPO);
-define('MSG_ERROR_INVALID_CONFIG', 'config.json doesn\'t have all required configuration.\n' + this.MSG_DOC_REPO);
-define('MSG_ERROR_INVALID_RAW', 'Raw file "{0}" is invalid.\n' + this.MSG_DOC_REPO);
-define('MSG_ERROR_INVALID_PHANTOM_ARGS', 'Arguments should be passed as: <script_path> <page_name> <output_name> <output_path>');
-
 /* DEBUG MSGs */
 define('MSG_DEBUG_START', 'Starting deploying.');
 define('MSG_DEBUG_FINISH', 'Finished deploying.');
@@ -26,9 +18,19 @@ define('MSG_DEBUG_PRERENDER', 'Prerendering.');
 define('MSG_DEBUG_PRERENDER_FILE_CREATED', 'File "{0}" was prerendered.');
 define('MSG_DEBUG_UPLOADER', 'Uploading to S3.');
 
+/* Partial MSGS */
+define('MSG_DOC_REPO', 'Follow the documentation available at: https://github.com/zanon-io/blode');
+
+/* ERROR MSGs */
+define('MSG_ERROR_CONFIG_NOT_FOUND', 'config.json not found in root directory or it could not be loaded.\n' + this.MSG_DOC_REPO);
+define('MSG_ERROR_INVALID_CONFIG', 'config.json doesn\'t have all required configuration.\n' + this.MSG_DOC_REPO);
+define('MSG_ERROR_INVALID_RAW', 'Raw file "{0}" is invalid.\n' + this.MSG_DOC_REPO);
+define('MSG_ERROR_INVALID_PHANTOM_ARGS', 'Arguments should be passed as: <script_path> <page_name> <output_name> <output_path>');
+
 /* Folders */
 define('FOLDER_JS', '\\js');
 define('FOLDER_PARTIALS', '\\partials');
+define('FOLDER_POSTS', '\\posts');
 define('FOLDER_RAW', '\\raw');
 define('FOLDER_TEMPLATES', '\\templates');
 
@@ -45,3 +47,4 @@ define('FILE_XML_SITEMAP', '\\sitemap.xml');
 
 /* Configs */
 define('JADE_OPTIONS', { pretty : true });
+define('STAGING_HOSTED_URL', 'http://localhost');

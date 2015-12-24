@@ -36,7 +36,7 @@ markdown(config)
   })
   .then(function (posts) {
     console.log(constants.MSG_DEBUG_PRERENDER);
-    return prerender(posts);
+    return prerender(config, posts);
   })
   .then(function () {
     console.log(constants.MSG_DEBUG_UPLOADER);

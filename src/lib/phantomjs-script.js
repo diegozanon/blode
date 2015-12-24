@@ -16,7 +16,7 @@ try {
       if (status != 'success') {
         console.error(status);
       } else {
-        fs.write(outputPath + '/' + outputFile, page.content, 'w');
+        fs.write(outputPath + '\\' + outputFile, page.content, 'w');
         console.log(constants.MSG_DEBUG_PRERENDER_FILE_CREATED.replace('{0}', outputFile));
       }
 

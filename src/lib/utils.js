@@ -72,16 +72,18 @@ exports.renderWithJade = function(files, jadeTemplate, callback) {
     });
 }
 
-exports.replaceFileContent = function(fileName, original, replacement, callback) {
+exports.replaceFileContent = function(fileName, originals, replacements, callback) {
 
-  fs.readFile(fileName, 'utf8', function (err, data) {
-    if (err)
-      callback(err);
+    fs.readFile(fileName, 'utf8', function (err, data) {
+        if (err)
+            callback(err);
 
-    var result = data.replace(original, replacement);
+        for (var i = 0; i < originals.length; i++) {
+            data = data.replace(new RegExp(originals[i], 'g'), replacements[i]); // replace multiple occurrences
+        }
 
-    fs.writeFile(fileName, result, 'utf8', callback);
-  });
+        fs.writeFile(fileName, data, 'utf8', callback);
+    });
 }
 
 function extractPostData(fileName, fileContents) {

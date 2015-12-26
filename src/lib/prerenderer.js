@@ -12,23 +12,15 @@ exports.prerender = function(config, posts, callback) {
 
   // Create Promises
   var removePreviousPostsP = Q.denodeify(removePreviousPosts);
-  var hideNgCloakFileP = Q.denodeify(hideNgCloakFile);
   var prerenderPagesP = Q.denodeify(prerenderPages);
-  var removeNgCloakClassP = Q.denodeify(removeNgCloakClass);
-  var showNgCloakFileP = Q.denodeify(showNgCloakFile);
+  var fixPrerenderedFilesP = Q.denodeify(fixPrerenderedFiles);
 
   removePreviousPostsP(config)
-    .then(function () {
-      return hideNgCloakFileP(config);
-    })
     .then(function () {
       return prerenderPagesP(args);
     })
     .then(function () {
-      return removeNgCloakClassP(config, posts);
-    })
-    .then(function () {
-      return showNgCloakFileP(config);
+      return fixPrerenderedFilesP(args);
     })
     .catch(function (err) {
       callback(err);
@@ -123,25 +115,26 @@ function removePreviousPosts(config, callback) {
   });
 }
 
-function hideNgCloakFile(config, callback) {
+function fixPrerenderedFiles(args, callback) {
 
-  var indexFile = config.directory + constants.FILE_HTML_INDEX;
-  var original = constants.REPLACE_NGCLOAK_FILE;
-  var replacement = constants.REPLACE_NGCLOAK_FILE_REPLACEMENT;
+  Q.all(args.map(function(arg) {
 
-  utils.replaceFileContent(indexFile, original, replacement, callback);
-}
+    var fileName = arg.outputPath + '\\' + arg.outputFile;
+    var originals = [
+        constants.REPLACE_NGVIEW,
+        constants.REPLACE_NGCLOAK_CLASS
+    ];
+    var replacements = [
+        constants.REPLACE_NGVIEW_NGCLOAK,
+        constants.REPLACE_NGCLOAK_INVALID_CLASS
+    ];
 
-function showNgCloakFile(config, callback) {
-
-  var indexFile = config.directory + constants.FILE_HTML_INDEX;
-  var original = constants.REPLACE_NGCLOAK_FILE;
-  var replacement = constants.REPLACE_NGCLOAK_FILE_REPLACEMENT;
-
-  // invert original with replacement to recover the previous file
-  utils.replaceFileContent(indexFile, replacement, original, callback);
-}
-
-function removeNgCloakClass(config, posts, callback) {
-  callback();
+    return Q.nfcall(utils.replaceFileContent, fileName, originals, replacements);
+  }))
+  .then(function() {
+    callback(null);
+  })
+  .catch(function(err) {
+    callback(err);
+  });
 }

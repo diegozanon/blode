@@ -88,17 +88,17 @@ describe('utils', function() {
         it('should replace a string inside a file', function(done) {
 
             var fileName = common.replaceTest.getPath();
-            var original = 'test-string-before';
-            var replacement = 'test-string-after';
+            var originals = ['test-string-before'];
+            var replacements = ['test-string-after'];
 
-            utils.replaceFileContent(fileName, original, replacement, function(err) {
+            utils.replaceFileContent(fileName, originals, replacements, function(err) {
 
                 common.readOneFile(fileName, function(err, contents) {
 
-                    expect(contents).to.equal(replacement);
+                    expect(contents).to.equal(replacements[0]);
 
                     // fix the file to its original contents
-                    utils.replaceFileContent(fileName, replacement, original, function(err) {
+                    utils.replaceFileContent(fileName, replacements, originals, function(err) {
                         done();
                     });
                 });

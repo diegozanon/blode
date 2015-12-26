@@ -37,7 +37,6 @@ define('FOLDER_TEMPLATES', '\\templates');
 
 /* File names */
 define('FILE_HTML_POSTS', this.FOLDER_PARTIALS + '\\posts.html');
-define('FILE_HTML_INDEX', '\\index.html');
 define('FILE_JADE_POST', this.FOLDER_TEMPLATES + '\\post.jade');
 define('FILE_JADE_POSTLIST', this.FOLDER_TEMPLATES + '\\postList.jade');
 define('FILE_JADE_RSS', this.FOLDER_TEMPLATES + '\\feed.jade');
@@ -53,5 +52,7 @@ define('STAGING_HOSTED_URL', 'http://localhost');
 define('PHANTOMJS_SCRIPT', 'phantomjs-script.js');
 
 /* Replace Content */
-define('REPLACE_NGCLOAK_FILE_ORIGINAL', '<script src="/js/ng-cloak.js"></script>');
-define('REPLACE_NGCLOAK_FILE_REPLACEMENT', '<!-- <script src="/js/ng-cloak.js"></script> -->');
+define('REPLACE_NGVIEW', 'ng-view-background ng-scope');
+define('REPLACE_NGVIEW_NGCLOAK', 'ng-view-background ng-scope ng-cloak');
+define('REPLACE_NGCLOAK_CLASS', '\\.ng-cloak'); // scaped dot for regex parser
+define('REPLACE_NGCLOAK_INVALID_CLASS', '.ng-cloak-invalid');

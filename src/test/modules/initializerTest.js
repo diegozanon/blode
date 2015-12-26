@@ -18,11 +18,11 @@ describe('initializer', function() {
         it('should validate if all options are available', function() {
 
             var tests = [
-                { config : { directory : 'a', awsAccessKeyId : 'b', awsSecretAccessKey : 'c', awsBucketName : 'd'}, valid : true},
+                { config : { directory : 'a', awsAccessKeyId : 'b', awsSecretAccessKey : 'c', awsRegion: 'd', awsBucketName : 'e'}, valid : true},
                 { config : { directory : 'a', awsAccessKeyId : 'b', awsSecretAccessKey : 'c'}, valid : false},
-                { config : { directory : 'a', awsAccessKeyId : 'b', awsBucketName : 'd'}, valid : false},
-                { config : { directory : 'a', awsSecretAccessKey : 'c', awsBucketName : 'd'}, valid : false},
-                { config : { awsAccessKeyId : 'b', awsSecretAccessKey : 'c', awsBucketName : 'd'}, valid : false},
+                { config : { directory : 'a', awsAccessKeyId : 'b', awsBucketName : 'e'}, valid : false},
+                { config : { directory : 'a', awsSecretAccessKey : 'c', awsBucketName : 'e'}, valid : false},
+                { config : { awsAccessKeyId : 'b', awsSecretAccessKey : 'c', awsBucketName : 'e'}, valid : false},
                 { config : { }, valid : false}
             ];
 

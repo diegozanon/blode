@@ -17,6 +17,7 @@ exports.partialsData = require('./testData/partialsData');
 exports.postsHtmlData = require('./testData/postsHtmlData');
 exports.routesData = require('./testData/routesData');
 exports.rssData = require('./testData/rssData');
+exports.replaceTest = require('./testData/replaceTest');
 
 var fs = require('fs');
 var path = require('path');

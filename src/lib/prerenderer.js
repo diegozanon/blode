@@ -1,4 +1,5 @@
 var constants = require('./constants');
+var utils = require('./utils');
 var binPath = require('phantomjs').path;
 var childProcess = require('child_process');
 var fs = require('fs');
@@ -11,11 +12,23 @@ exports.prerender = function(config, posts, callback) {
 
   // Create Promises
   var removePreviousPostsP = Q.denodeify(removePreviousPosts);
+  var hideNgCloakFileP = Q.denodeify(hideNgCloakFile);
   var prerenderPagesP = Q.denodeify(prerenderPages);
+  var removeNgCloakClassP = Q.denodeify(removeNgCloakClass);
+  var showNgCloakFileP = Q.denodeify(showNgCloakFile);
 
   removePreviousPostsP(config)
     .then(function () {
+      return hideNgCloakFileP(config);
+    })
+    .then(function () {
       return prerenderPagesP(args);
+    })
+    .then(function () {
+      return removeNgCloakClassP(config, posts);
+    })
+    .then(function () {
+      return showNgCloakFileP(config);
     })
     .catch(function (err) {
       callback(err);
@@ -40,7 +53,7 @@ function prerenderPages(args, callback) {
 function execPhantom(pageName, outputFile, outputPath, callback) {
 
   var childArgs = [
-    path.join(__dirname, 'phantomjs-script.js'),
+    path.join(__dirname, constants.PHANTOMJS_SCRIPT),
     pageName,
     outputFile,
     outputPath
@@ -108,4 +121,27 @@ function removePreviousPosts(config, callback) {
       callback(err);
     });
   });
+}
+
+function hideNgCloakFile(config, callback) {
+
+  var indexFile = config.directory + constants.FILE_HTML_INDEX;
+  var original = constants.REPLACE_NGCLOAK_FILE;
+  var replacement = constants.REPLACE_NGCLOAK_FILE_REPLACEMENT;
+
+  utils.replaceFileContent(indexFile, original, replacement, callback);
+}
+
+function showNgCloakFile(config, callback) {
+
+  var indexFile = config.directory + constants.FILE_HTML_INDEX;
+  var original = constants.REPLACE_NGCLOAK_FILE;
+  var replacement = constants.REPLACE_NGCLOAK_FILE_REPLACEMENT;
+
+  // invert original with replacement to recover the previous file
+  utils.replaceFileContent(indexFile, replacement, original, callback);
+}
+
+function removeNgCloakClass(config, posts, callback) {
+  callback();
 }

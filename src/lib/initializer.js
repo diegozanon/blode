@@ -16,6 +16,7 @@ exports.validate = function(config) {
     if(!config.directory ||
         !config.awsAccessKeyId ||
         !config.awsSecretAccessKey ||
+        !config.awsRegion ||
         !config.awsBucketName) {
 
         throw constants.MSG_ERROR_INVALID_CONFIG;

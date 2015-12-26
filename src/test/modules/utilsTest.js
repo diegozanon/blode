@@ -82,4 +82,27 @@ describe('utils', function() {
     describe('#renderWithJade()', function() {
         // already tested when called by testMarkdowner and others
     });
+
+    describe('#replaceFileContent()', function() {
+
+        it('should replace a string inside a file', function(done) {
+
+            var fileName = common.replaceTest.getPath();
+            var original = 'test-string-before';
+            var replacement = 'test-string-after';
+
+            utils.replaceFileContent(fileName, original, replacement, function(err) {
+
+                common.readOneFile(fileName, function(err, contents) {
+
+                    expect(contents).to.equal(replacement);
+
+                    // fix the file to its original contents
+                    utils.replaceFileContent(fileName, replacement, original, function(err) {
+                        done();
+                    });
+                });
+            });
+        });
+    });
 });

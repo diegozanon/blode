@@ -72,6 +72,18 @@ exports.renderWithJade = function(files, jadeTemplate, callback) {
     });
 }
 
+exports.replaceFileContent = function(fileName, original, replacement, callback) {
+
+  fs.readFile(fileName, 'utf8', function (err, data) {
+    if (err)
+      callback(err);
+
+    var result = data.replace(original, replacement);
+
+    fs.writeFile(fileName, result, 'utf8', callback);
+  });
+}
+
 function extractPostData(fileName, fileContents) {
 
     var lines = fileContents.toString().split('\n');

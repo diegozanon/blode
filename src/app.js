@@ -4,12 +4,12 @@ var initializer = require("./lib/initializer");
 
 // Create Promises
 var markdown = Q.denodeify(require("./lib/markdowner").markdown);
-var writePostsList = Q.denodeify(require("./lib/postsListWriter").writePostsList);
-var writeRoutes = Q.denodeify(require("./lib/routesWriter").writeRoutes);
-var writeRss = Q.denodeify(require("./lib/rssWriter").writeRss);
-var writeSitemap = Q.denodeify(require("./lib/sitemapWriter").writeSitemap);
+var writePostsList = Q.denodeify(require("./lib/posts-list-writer").writePostsList);
+var writeRoutes = Q.denodeify(require("./lib/routes-writer").writeRoutes);
+var writeRss = Q.denodeify(require("./lib/rss-writer").writeRss);
+var writeSitemap = Q.denodeify(require("./lib/sitemap-writer").writeSitemap);
 var prerender = Q.denodeify(require("./lib/prerenderer").prerender);
-var uploadToS3 = Q.denodeify(require("./lib/S3uploader").uploadToS3);
+var uploadToS3 = Q.denodeify(require("./lib/s3-uploader").uploadToS3);
 
 // Validate configuration
 var config = initializer.getConfig();

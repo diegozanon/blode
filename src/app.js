@@ -40,7 +40,7 @@ markdown(config)
   })
   .then(function () {
     console.log(constants.MSG_DEBUG_UPLOADER);
-    return uploadToS3();
+    return uploadToS3(config);
   })
   .catch(function (err) {
     console.error(err);

@@ -13,7 +13,7 @@ var uploadToS3 = Q.denodeify(require("./lib/s3-uploader").uploadToS3);
 
 // Validate configuration
 var config = initializer.getConfig();
-initializer.validate(config); // throws an error if invalid
+initializer.validate(config); // throws an error if invalid  
 
 console.log(constants.MSG_DEBUG_START);
 console.log(constants.MSG_DEBUG_MARKDOWNER);
@@ -38,9 +38,9 @@ markdown(config)
     console.log(constants.MSG_DEBUG_PRERENDER);
     return prerender(config, posts);
   })
-  .then(function () {
+  .then(function (posts) {
     console.log(constants.MSG_DEBUG_UPLOADER);
-    return uploadToS3(config);
+    return uploadToS3(config, posts);
   })
   .catch(function (err) {
     console.error(err);

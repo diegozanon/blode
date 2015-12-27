@@ -26,7 +26,7 @@ exports.prerender = function(config, posts, callback) {
       callback(err);
     })
     .done(function () {
-      callback();
+      callback(null, posts);
     });
 };
 
@@ -74,7 +74,7 @@ function getArguments(config, posts) {
 
   var index = {
     pageName: constants.STAGING_HOSTED_URL,
-    outputFile: 'index.html',
+    outputFile: constants.FILE_NAME_HTML_INDEX,
     outputPath: config.directory + constants.FOLDER_PRERENDERED
   };
 
@@ -82,7 +82,7 @@ function getArguments(config, posts) {
 
   var notFound = {
     pageName: constants.STAGING_HOSTED_URL + '/' + 'page-that-does-not-exist',
-    outputFile: '404',
+    outputFile: constants.FILE_NAME_PRERENDERED_404,
     outputPath: config.directory + constants.FOLDER_PRERENDERED
   };
 

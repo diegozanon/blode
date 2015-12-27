@@ -15,7 +15,7 @@ exports.uploadToS3 = function(config, posts, callback) {
             callback(err);
 
         Q.all(files.map(function(file) {
-            return Q.nfcall(uploadFile, s3, config, file.name, file.contents, file.contentType);
+            return Q.nfcall(uploadFile, s3, config, file);
         }))
         .then(function() {
             callback(null);
@@ -49,33 +49,33 @@ function getFilesToUpload(config, posts, callback) {
     /* Root files */
 
     files.push({
-        name: constants.FILE_NAME_HTML_INDEX,
-        contents: readFileSync(config.directory + constants.FILE_HTML_INDEX_PRERENDERED),
-        contentType: constants.CONTENT_TYPE_HTML
+        Key: constants.FILE_NAME_HTML_INDEX,
+        Body: fs.readFileSync(config.directory + constants.FILE_HTML_INDEX_PRERENDERED),
+        ContentType: constants.CONTENT_TYPE_HTML
     });
 
     files.push({
-        name: constants.FILE_NAME_PRERENDERED_404,
-        contents: readFileSync(config.directory + constants.FILE_HTML_404_PRERENDERED),
-        contentType: constants.CONTENT_TYPE_HTML
+        Key: constants.FILE_NAME_PRERENDERED_404,
+        Body: fs.readFileSync(config.directory + constants.FILE_HTML_404_PRERENDERED),
+        ContentType: constants.CONTENT_TYPE_HTML
     });
 
     files.push({
-        name: constants.FILE_NAME_ICO_FAVICON,
-        contents: readFileSync(config.directory + constants.FILE_ICO_FAVICON),
-        contentType: constants.CONTENT_TYPE_ICO
+        Key: constants.FILE_NAME_ICO_FAVICON,
+        Body: fs.readFileSync(config.directory + constants.FILE_ICO_FAVICON),
+        ContentType: constants.CONTENT_TYPE_ICO
     });
 
     files.push({
-        name: constants.FILE_NAME_XML_RSS,
-        contents: readFileSync(config.directory + constants.FILE_XML_RSS),
-        contentType: constants.CONTENT_TYPE_XML
+        Key: constants.FILE_NAME_XML_RSS,
+        Body: fs.readFileSync(config.directory + constants.FILE_XML_RSS),
+        ContentType: constants.CONTENT_TYPE_XML
     });
 
     files.push({
-        name: constants.FILE_NAME_XML_SITEMAP,
-        contents: readFileSync(config.directory + constants.FILE_XML_SITEMAP),
-        contentType: constants.CONTENT_TYPE_XML
+        Key: constants.FILE_NAME_XML_SITEMAP,
+        Body: fs.readFileSync(config.directory + constants.FILE_XML_SITEMAP),
+        ContentType: constants.CONTENT_TYPE_XML
     });
 
     /* Partials and Posts files */
@@ -83,70 +83,72 @@ function getFilesToUpload(config, posts, callback) {
     posts.forEach(function(post) {
 
         files.push({
-            name: constants.FOLDER_AWS_POSTS + post.url,
-            contents: readFileSync(config.directory + constants.FOLDER_POSTS + '\\' + post.url),
-            contentType: constants.CONTENT_TYPE_HTML
+            Key: constants.FOLDER_AWS_POSTS + post.url,
+            Body: fs.readFileSync(config.directory + constants.FOLDER_POSTS + '\\' + post.url),
+            ContentType: constants.CONTENT_TYPE_HTML
         });
 
+        var partialName = post.isoDate + '-' + post.url + '.html';
+
         files.push({
-            name: constants.FOLDER_AWS_PARTIALS + post.isoDate + '-' + post.url + '.html',
-            contents: readFileSync(config.directory + constants.FOLDER_POSTS + '\\' + post.url),
-            contentType: constants.CONTENT_TYPE_HTML
+            Key: constants.FOLDER_AWS_PARTIALS + partialName,
+            Body: fs.readFileSync(config.directory + constants.FOLDER_PARTIALS + '\\' + partialName),
+            ContentType: constants.CONTENT_TYPE_HTML
         });
     });
 
     /* Remaining partials */
 
     files.push({
-        name: constants.FOLDER_AWS_PARTIALS + constants.FILE_NAME_HTML_404,
-        contents: readFileSync(config.directory + constants.FILE_HTML_404),
-        contentType: constants.CONTENT_TYPE_HTML
+        Key: constants.FOLDER_AWS_PARTIALS + constants.FILE_NAME_HTML_404,
+        Body: fs.readFileSync(config.directory + constants.FILE_HTML_404),
+        ContentType: constants.CONTENT_TYPE_HTML
     });
 
     files.push({
-        name: constants.FOLDER_AWS_PARTIALS + constants.FILE_NAME_HTML_POSTS,
-        contents: readFileSync(config.directory + constants.FILE_HTML_POSTS),
-        contentType: constants.CONTENT_TYPE_HTML
+        Key: constants.FOLDER_AWS_PARTIALS + constants.FILE_NAME_HTML_POSTS,
+        Body: fs.readFileSync(config.directory + constants.FILE_HTML_POSTS),
+        ContentType: constants.CONTENT_TYPE_HTML
     });
 
     /* JavaScript files */
 
     files.push({
-        name: constants.FOLDER_AWS_JS + constants.FILE_NAME_JS_APP,
-        contents: readFileSync(config.directory + constants.FILE_JS_APP),
-        contentType: constants.CONTENT_TYPE_JS
+        Key: constants.FOLDER_AWS_JS + constants.FILE_NAME_JS_APP,
+        Body: fs.readFileSync(config.directory + constants.FILE_JS_APP),
+        ContentType: constants.CONTENT_TYPE_JS
     });
 
     files.push({
-        name: constants.FOLDER_AWS_JS + constants.FILE_NAME_JS_CONTROLLERS,
-        contents: readFileSync(config.directory + constants.FILE_JS_CONTROLLERS),
-        contentType: constants.CONTENT_TYPE_JS
+        Key: constants.FOLDER_AWS_JS + constants.FILE_NAME_JS_CONTROLLERS,
+        Body: fs.readFileSync(config.directory + constants.FILE_JS_CONTROLLERS),
+        ContentType: constants.CONTENT_TYPE_JS
     });
 
     files.push({
-        name: constants.FOLDER_AWS_JS + constants.FILE_NAME_JS_DIRECTIVES,
-        contents: readFileSync(config.directory + constants.FILE_JS_DIRECTIVES),
-        contentType: constants.CONTENT_TYPE_JS
+        Key: constants.FOLDER_AWS_JS + constants.FILE_NAME_JS_DIRECTIVES,
+        Body: fs.readFileSync(config.directory + constants.FILE_JS_DIRECTIVES),
+        ContentType: constants.CONTENT_TYPE_JS
     });
 
     files.push({
-        name: constants.FOLDER_AWS_JS + constants.FILE_NAME_JS_NGCLOAK,
-        contents: readFileSync(config.directory + constants.FILE_JS_NGCLOAK),
-        contentType: constants.CONTENT_TYPE_JS
+        Key: constants.FOLDER_AWS_JS + constants.FILE_NAME_JS_NGCLOAK,
+        Body: fs.readFileSync(config.directory + constants.FILE_JS_NGCLOAK),
+        ContentType: constants.CONTENT_TYPE_JS
     });
 
     files.push({
-        name: constants.FOLDER_AWS_JS + constants.FILE_NAME_JS_ROUTES,
-        contents: readFileSync(config.directory + constants.FILE_JS_ROUTES),
-        contentType: constants.CONTENT_TYPE_JS
+        Key: constants.FOLDER_AWS_JS + constants.FILE_NAME_JS_ROUTES,
+        Body: fs.readFileSync(config.directory + constants.FILE_JS_ROUTES),
+        ContentType: constants.CONTENT_TYPE_JS
     });
 
     /* CSS files */
 
     files.push({
-        name: constants.FOLDER_AWS_CSS + constants.FILE_NAME_CSS_SITE,
-        contents: readFileSync(config.directory + constants.FILE_CSS_SITE),
-        contentType: constants.CONTENT_TYPE_CSS
+        Key: constants.FOLDER_AWS_CSS + constants.FILE_NAME_CSS_SITE,
+        Body: fs.readFileSync(config.directory + constants.FILE_CSS_SITE),
+        ContentType: constants.CONTENT_TYPE_CSS
     });
 
     /* Image files */
@@ -158,7 +160,17 @@ function getFilesToUpload(config, posts, callback) {
 
         files = files.concat(images);
 
-        callback(null, files);
+        /* JavaScript assets */
+
+        getJsAssetsToUpload(config, function(err, assets) {
+
+            if(err)
+                callback(err);
+
+            files = files.concat(assets);
+
+            callback(null, files);
+        });
     });
 }
 
@@ -184,8 +196,27 @@ function getImagesToUpload(config, callback) {
                 callback(err);
 
             images = images.concat(files2);
+
             callback(null, images);
         });
+    });
+}
+
+function getJsAssetsToUpload(config, callback) {
+
+    var awsFolderAssets = constants.FOLDER_AWS_JS_ASSETS;
+    var contentType = constants.CONTENT_TYPE_JS;
+    var assetsDir = config.directory + constants.FOLDER_JS_ASSETS;
+    var assets = [];
+
+    getFilesToUploadInDirectory(assetsDir, awsFolderAssets, contentType, function(err, files) {
+
+        if (err)
+            callback(err);
+
+        assets = assets.concat(files);
+
+        callback(null, assets);
     });
 }
 
@@ -203,9 +234,9 @@ function getFilesToUploadInDirectory(directory, awsFolder, contentType, callback
                 var path = directory + '\\' + file;
                 if (!fs.lstatSync(path).isDirectory()) {
                     filesToUpload.push({
-                        name: awsFolder + file,
-                        contents: readFileSync(path),
-                        contentType: contentType
+                        Key: awsFolder + file,
+                        Body: fs.readFileSync(path),
+                        ContentType: contentType
                     });
                 }
             });
@@ -215,26 +246,10 @@ function getFilesToUploadInDirectory(directory, awsFolder, contentType, callback
     });
 }
 
-function uploadFile(s3, config, fileName, contents, contentType, callback) {
+function uploadFile(s3, config, params, callback) {
 
-    var params = {
-        Bucket: config.awsBucketName,
-        Key: fileName,
-        Body: contents,
-        ContentType: contentType
-    };
+    params.Bucket = config.awsBucketName;
+    params.ACL = constants.AWS_ACL;
 
-    s3.putObject(params, callback);
-
-    s3.putObject(params, function(err, data) {
-            if (err) {
-                console.log('Error putting object on S3: ' + err);
-            } else {
-                console.log('Placed object on S3: ' + data);
-            }
-        });
-}
-
-function readFileSync(path) {
-    return fs.readFileSync(path, 'utf8');
+    s3.upload(params, callback);
 }

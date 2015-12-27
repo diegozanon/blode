@@ -15,7 +15,7 @@ define('MSG_DEBUG_ROUTES', 'Writing routes file.');
 define('MSG_DEBUG_RSS', 'Writing RSS file.');
 define('MSG_DEBUG_SITEMAP', 'Writing sitemap.');
 define('MSG_DEBUG_PRERENDER', 'Prerendering.');
-define('MSG_DEBUG_PRERENDER_FILE_CREATED', 'File "{0}" was prerendered.');
+define('MSG_DEBUG_PRERENDER_FILE_CREATED', 'File "{0}" was pre-rendered.');
 define('MSG_DEBUG_UPLOADER', 'Uploading to S3.');
 
 /* Partial MSGS */
@@ -32,6 +32,7 @@ define('FOLDER_CSS', '\\css');
 define('FOLDER_IMAGES', '\\images');
 define('FOLDER_IMAGES_POSTS', '\\images\\posts');
 define('FOLDER_JS', '\\js');
+define('FOLDER_JS_ASSETS', '\\js\\assets');
 define('FOLDER_PARTIALS', '\\partials');
 define('FOLDER_POSTS', '\\posts');
 define('FOLDER_PRERENDERED', '\\prerendered');
@@ -43,6 +44,7 @@ define('FOLDER_AWS_CSS', 'css/');
 define('FOLDER_AWS_IMAGES', 'images/');
 define('FOLDER_AWS_IMAGES_POSTS', 'images/posts/');
 define('FOLDER_AWS_JS', 'js/');
+define('FOLDER_AWS_JS_ASSETS', 'js/assets/');
 define('FOLDER_AWS_PARTIALS', 'partials/');
 define('FOLDER_AWS_POSTS', 'posts/');
 
@@ -85,6 +87,7 @@ define('FILE_XML_SITEMAP', '\\' + this.FILE_NAME_XML_SITEMAP);
 define('JADE_OPTIONS', { pretty : true });
 define('STAGING_HOSTED_URL', 'http://localhost');
 define('PHANTOMJS_SCRIPT', 'phantomjs-script.js');
+define('AWS_ACL', 'public-read');
 
 /* Replace Content */
 define('REPLACE_NGVIEW', 'ng-view-background ng-scope');

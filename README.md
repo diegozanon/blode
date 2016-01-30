@@ -62,12 +62,16 @@ Blog posts should be created using the [Markdown](http://en.wikipedia.org/wiki/M
 
 blode requires that each post follows this structure:
 
-> Title: Post1  
-> Summary: Summary of post1.  
-> Tags: Tag1  
-> Date: NOV 15, 2015  
-> URL: post1  
->  
-> ## Post1 Title  
->  
-> <Here starts the content of your Post>  
+<pre>
+<code>
+Title: Post1  
+Summary: Summary of post1.  
+Tags: Tag1  
+Date: NOV 15, 2015  
+URL: post1  
+       
+## Post1 Title  
+    
+Here starts the content of your Post
+</code>
+</pre>

@@ -24,7 +24,7 @@ You can use [Jekyll](http://jekyllrb.com/) or [another](http://www.sitepoint.com
 > npm install blode -g
 ```
 
-## Configuration
+## How to use
 
 Below follows some instructions about how to use blode. If you have any doubt, please, file an issue and I'll try to help you.
 
@@ -45,7 +45,7 @@ If you have configured a AWS account, you can deploy the blog directly to S3:
 
 ## Configuration
 
-You need to create a config.json file at the same level of app.js with the following:
+You need to modify the config.json file the is located at root level of your blog. Fill the following properties:
 
 ```json
 {
@@ -60,18 +60,20 @@ You need to create a config.json file at the same level of app.js with the follo
 
 Blog posts should be created using the [Markdown](http://en.wikipedia.org/wiki/Markdown) markup language and you can use your favorite editor to this. If you don't have one, I suggest: [stackedit.io](https://stackedit.io)
 
-blode requires that each post follows this structure:
+blode requires that each post uses the following format:  
 
 <pre>
 <code>
-Title: Post1  
-Summary: Summary of post1.  
-Tags: Tag1  
-Date: NOV 15, 2015  
-URL: post1  
+Title: {{ Post Title }}  
+Summary: {{ Summary of post. }}  
+Tags: {{ TagX }}  
+Date: {{ NOV 15, 2015 }}  
+URL: {{ post-url }}  
        
-## Post1 Title  
+## {{ Post Title  }}  
     
-Here starts the content of your Post
+{{ Here starts the content of your Post }}  
 </code>
 </pre>
+
+**Note:** replace {{ text }} by your data. 

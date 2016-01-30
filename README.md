@@ -64,15 +64,15 @@ blode requires that each post uses the following format:
 
 <pre>
 <code>
-Title: {{ Post Title }}  
-Summary: {{ Summary of post. }}  
-Tags: {{ TagX }}  
-Date: {{ NOV 15, 2015 }}  
-URL: {{ post-url }}  
+Title: < Post Title >  
+Summary: < Summary of post. >  
+Tags: < TagX >  
+Date: < NOV 15, 2015 >  
+URL: < post-url >  
        
-## {{ Post Title  }}  
+< ##  Post Title  >  
     
-{{ Here starts the content of your Post }}  
+< Here starts the content of your Post >  
 </code>
 </pre>
 

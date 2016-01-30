@@ -38,7 +38,7 @@ After creating new posts, adding markdown files inside the raw folder, build the
 > blode build
 ```
 
-If you have configured a AWS account, you can deploy the blog directly to S3:
+If you have configured an AWS account, you can deploy the blog directly to S3:
 ```
 > blode deploy
 ```

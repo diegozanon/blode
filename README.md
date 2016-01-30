@@ -76,4 +76,4 @@ URL: < post-url >
 </code>
 </pre>
 
-**Note:** replace {{ text }} by your data. 
+**Note:** replace &lt; text &gt; by your data. 

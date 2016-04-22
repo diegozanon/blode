@@ -7,8 +7,9 @@ function define(name, value) {
 }
 
 /* DEBUG MSGs */
-define('MSG_DEBUG_START', 'Starting deploying.');
-define('MSG_DEBUG_FINISH', 'Finished deploying.');
+define('MSG_DEBUG_START_DEPLOY', 'Starting deploying.');
+define('MSG_DEBUG_FINISH_DEPLOY', 'Finished deploying.');
+define('MSG_DEBUG_FINISH_CREATING', 'Finished creating blog example.');
 define('MSG_DEBUG_MARKDOWNER', 'Parsing markdown posts.');
 define('MSG_DEBUG_POSTSLIST', 'Writing posts list file.');
 define('MSG_DEBUG_ROUTES', 'Writing routes file.');
@@ -23,9 +24,14 @@ define('MSG_DOC_REPO', 'Follow the documentation available at: https://github.co
 
 /* ERROR MSGs */
 define('MSG_ERROR_CONFIG_NOT_FOUND', 'config.json not found in root directory or it could not be loaded.\n' + this.MSG_DOC_REPO);
+define('MSG_ERROR_INVALID_ARGS', 'Invalid arguments.\n' + this.MSG_DOC_REPO);
 define('MSG_ERROR_INVALID_CONFIG', 'config.json doesn\'t have all required configuration.\n' + this.MSG_DOC_REPO);
 define('MSG_ERROR_INVALID_RAW', 'Raw file "{0}" is invalid.\n' + this.MSG_DOC_REPO);
 define('MSG_ERROR_INVALID_PHANTOM_ARGS', 'Arguments should be passed as: <script_path> <page_name> <output_name> <output_path>');
+
+/* Arguments */
+define('ARG_NEW', 'new');
+define('ARG_DEPLOY', 'deploy');
 
 /* Folders */
 define('FOLDER_CSS', '\\css');

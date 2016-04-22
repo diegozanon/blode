@@ -1,10 +1,10 @@
 # blode
-blode is a simple Node.js application to create static websites. I've designed it for fun and to create my own blog. You can see the result here: [zanon.io](http://zanon.io).
+blode is a simple Node.js application to create static blogs. I've designed it for fun and to create my own blog. You can see the result here: [zanon.io](http://zanon.io).
 
-The Node.js application reads the blog posts written with the [Markdown](http://daringfireball.net/projects/markdown/) syntax and compile them to HTML. Since its a SPA made with Angular, blode also pre-render the pages to improve SEO. For deployment, the content is gzipped and uploaded to Amazon S3.
+The Node.js application reads the blog posts written with the [Markdown](http://daringfireball.net/projects/markdown/) syntax and compile them to HTML. Since it's a SPA made with Angular, blode also pre-render the pages to improve SEO. For deployment, the content is gzipped and uploaded to Amazon S3.
 
 ## Why a static site generator and not Wordpress?
-You can use [Jekyll](http://jekyllrb.com/) or [another](http://www.sitepoint.com/6-static-blog-generators-arent-jekyll/) static website generator, but please, don't use Wordpress for blogging! Static websites doesn't need a dedicated server neither a database. This means an extremely fast and cheap website. Also, you don't need to worry about security and server updates. You can read more reasons [here](http://www.sitepoint.com/wordpress-vs-jekyll-might-want-make-switch/).
+You can use [Jekyll](http://jekyllrb.com/) or [another](http://www.sitepoint.com/6-static-blog-generators-arent-jekyll/) static website generator, but please, don't use Wordpress for blogging! Static websites don't need a dedicated server neither a database. This means an extremely fast and cheap website. Also, you don't need to worry about security and server updates. You can read more reasons [here](http://www.sitepoint.com/wordpress-vs-jekyll-might-want-make-switch/).
 
 ## Features
 
@@ -18,7 +18,9 @@ You can use [Jekyll](http://jekyllrb.com/) or [another](http://www.sitepoint.com
 
 ## Installing
 
-// TODO
+```
+> npm install static-blode -g
+```
 
 ## Configuration
 
@@ -51,7 +53,11 @@ blode requires three things:
 
 ## How to use
 
-// TODO
+```
+blode new my-blog-folder
+cd my-blog-folder
+blode deploy
+```
 
 1. When you run blode for the first time, it will create 4 folders for you - js, css, images and markdown - in the **input** folder.
 2. Place your content in the correspondent folders.

@@ -1,4 +1,2 @@
 .idea
-src/node_modules
-src/config.json
-example/web.config
+node_modules

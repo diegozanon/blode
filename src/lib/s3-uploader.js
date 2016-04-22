@@ -1,27 +1,34 @@
 var constants = require('./constants');
+var utils = require('./utils');
 var AWS = require('aws-sdk');
 var fs = require('fs');
 var Q = require('q');
 
-exports.uploadToS3 = function(config, posts, callback) {
+exports.uploadToS3 = function(config, uploadPrerendered, callback) {
 
-    updateAwsConfig(config, AWS);
+    utils.getPosts(config, function(err, posts) {
 
-    var s3 = new AWS.S3();
-
-    getFilesToUpload(config, posts, function(err, files) {
-
-        if (err)
+        if(err)
             callback(err);
 
-        Q.all(files.map(function(file) {
-            return Q.nfcall(uploadFile, s3, config, file);
-        }))
-        .then(function() {
-            callback(null);
-        })
-        .catch(function(err) {
-            callback(err);
+        updateAwsConfig(config, AWS);
+
+        var s3 = new AWS.S3();
+
+        getFilesToUpload(config, posts, uploadPrerendered, function(err, files) {
+
+            if (err)
+                callback(err);
+
+            Q.all(files.map(function(file) {
+                return Q.nfcall(uploadFile, s3, config, file);
+            }))
+            .then(function() {
+                callback(null, posts);
+            })
+            .catch(function(err) {
+                callback(err);
+            });
         });
     });
 };
@@ -42,9 +49,23 @@ function updateAwsConfig(config, AWS) {
   }
 }
 
-function getFilesToUpload(config, posts, callback) {
+function getFilesToUpload(config, posts, uploadPrerendered, callback) {
 
     var files = [];
+
+    if (uploadPrerendered) {
+
+      /* Prerendered files */
+      posts.forEach(function(post) {
+          files.push({
+              Key: constants.FOLDER_AWS_POSTS + post.url,
+              Body: fs.readFileSync(config.directory + constants.FOLDER_POSTS + '\\' + post.url),
+              ContentType: constants.CONTENT_TYPE_HTML
+          });
+      });
+
+      callback(null, files);
+    }
 
     /* Root files */
 
@@ -78,15 +99,9 @@ function getFilesToUpload(config, posts, callback) {
         ContentType: constants.CONTENT_TYPE_XML
     });
 
-    /* Partials and Posts files */
+    /* Partials files */
 
     posts.forEach(function(post) {
-
-        files.push({
-            Key: constants.FOLDER_AWS_POSTS + post.url,
-            Body: fs.readFileSync(config.directory + constants.FOLDER_POSTS + '\\' + post.url),
-            ContentType: constants.CONTENT_TYPE_HTML
-        });
 
         var partialName = post.isoDate + '-' + post.url + '.html';
 

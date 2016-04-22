@@ -92,14 +92,16 @@ function deploy() {
 
   console.log(constants.MSG_DEBUG_START_DEPLOY);
   console.log(constants.MSG_DEBUG_UPLOADER);
-  uploadToS3(config) // TODO: retrieve posts again
+  var uploadPrerendered = false;
+  uploadToS3(config, uploadPrerendered)
     .then(function (posts) {
       console.log(constants.MSG_DEBUG_PRERENDER);
       return prerender(config, posts);
     })
     .then(function (posts) {
-      console.log(constants.MSG_DEBUG_UPLOADER);
-      return uploadToS3(config, posts); // upload the prerendered files
+      console.log(constants.MSG_DEBUG_UPLOADER_PRERENDERED);
+      uploadPrerendered = true;
+      return uploadToS3(config, uploadPrerendered);
     })
     .catch(function (err) {
       console.error(err);

@@ -16,9 +16,10 @@ define('MSG_DEBUG_POSTSLIST', 'Writing posts list file.');
 define('MSG_DEBUG_ROUTES', 'Writing routes file.');
 define('MSG_DEBUG_RSS', 'Writing RSS file.');
 define('MSG_DEBUG_SITEMAP', 'Writing sitemap.');
-define('MSG_DEBUG_PRERENDER', 'Prerendering.');
+define('MSG_DEBUG_PRERENDER', 'Pre-rendering.');
 define('MSG_DEBUG_PRERENDER_FILE_CREATED', 'File "{0}" was pre-rendered.');
 define('MSG_DEBUG_UPLOADER', 'Uploading to S3.');
+define('MSG_DEBUG_UPLOADER_PRERENDERED', 'Uploading the pre-rendered files to S3.');
 
 /* Partial MSGS */
 define('MSG_DOC_REPO', 'Follow the documentation available at: https://github.com/zanon-io/blode');

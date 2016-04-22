@@ -99,12 +99,12 @@ function extractPostData(fileName, fileContents) {
     }
 
     var postData = {
-        title : lines[0].replace('Title:', '').trim(),
-        summary : lines[1].replace('Summary:', '').trim(),
-        tags : lines[2].replace('Tags:', '').trim(),
-        date : lines[3].replace('Date:', '').trim(),
-        url : lines[4].replace('URL:', '').trim(),
-        content : content.replace(/[\r\n]/g, '\n').trim()
+        title: lines[0].replace('Title:', '').trim(),
+        summary: lines[1].replace('Summary:', '').trim(),
+        tags: lines[2].replace('Tags:', '').trim(),
+        date: lines[3].replace('Date:', '').trim(),
+        url: lines[4].replace('URL:', '').trim(),
+        content: content.replace(/[\r\n]/g, '\n').trim()
     };
 
     return postData;

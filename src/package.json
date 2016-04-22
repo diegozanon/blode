@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/zanon-io/blode/issues"
   },
-  "homepage": "https://github.com/zanon-io/blode",
+  "homepage": "https://github.com/zanon-io/blode#readme",
   "devDependencies": {
     "chai": "^3.4.0",
     "chai-datetime": "^1.4.0",

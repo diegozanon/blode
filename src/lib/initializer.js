@@ -5,14 +5,20 @@ exports.getCmd = function() {
   // node app new my-blog
   if (process.argv.length === 4 && process.argv[2] === constants.ARG_NEW) {
     return {
-      createNew: true,
+      name: constants.ARG_NEW,
       arg: process.argv[3]
+    }
+  }
+  // node app build
+  else if (process.argv.length === 3 && process.argv[2] === constants.ARG_BUILD) {
+    return {
+      name: constants.ARG_BUILD
     }
   }
   // node app deploy
   else if (process.argv.length === 3 && process.argv[2] === constants.ARG_DEPLOY) {
     return {
-      deploy: true
+      name: constants.ARG_DEPLOY
     }
   }
   // not mapped
@@ -34,7 +40,7 @@ exports.getConfig = function() {
 
 exports.validate = function(config) {
 
-    if(!config.directory) {
+    if(!config.awsBucketName) {
         throw constants.MSG_ERROR_INVALID_CONFIG;
     }
     else {

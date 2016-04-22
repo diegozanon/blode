@@ -8,8 +8,9 @@ function define(name, value) {
 
 /* DEBUG MSGs */
 define('MSG_DEBUG_START_DEPLOY', 'Starting deploying.');
-define('MSG_DEBUG_FINISH_DEPLOY', 'Finished deploying.');
-define('MSG_DEBUG_FINISH_CREATING', 'Finished creating blog example.');
+define('MSG_DEBUG_FINISHED_DEPLOY', 'Finished deploying.');
+define('MSG_DEBUG_FINISHED_CREATING', 'The blog sample was created.');
+define('MSG_DEBUG_FINISHED_BUILD', 'Finished building.');
 define('MSG_DEBUG_MARKDOWNER', 'Parsing markdown posts.');
 define('MSG_DEBUG_POSTSLIST', 'Writing posts list file.');
 define('MSG_DEBUG_ROUTES', 'Writing routes file.');
@@ -31,6 +32,7 @@ define('MSG_ERROR_INVALID_PHANTOM_ARGS', 'Arguments should be passed as: <script
 
 /* Arguments */
 define('ARG_NEW', 'new');
+define('ARG_BUILD', 'build');
 define('ARG_DEPLOY', 'deploy');
 
 /* Folders */

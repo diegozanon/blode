@@ -1,6 +1,8 @@
 exports.chai = require('chai');
 exports.expect = exports.chai.expect;
 exports.chai.use(require('chai-datetime'));
+
+// libs
 exports.constants = require('../lib/constants');
 exports.utils = require('../lib/utils');
 exports.initializer = require('../lib/initializer');
@@ -9,8 +11,8 @@ exports.postsListWriter = require('../lib/posts-list-writer');
 exports.routesWriter = require('../lib/routes-writer');
 exports.rssWriter = require('../lib/rss-writer');
 exports.sitemapWriter = require('../lib/sitemap-writer');
-exports.prerenderer = require('../lib/prerenderer');
-exports.S3uploader = require('../lib/s3-uploader');
+
+// test data
 exports.sitemapData = require('./testData/sitemap-data');
 exports.postsData = require('./testData/posts-data');
 exports.partialsData = require('./testData/partials-data');
@@ -24,7 +26,7 @@ var path = require('path');
 var Q = require('q');
 
 var config = {
-    directory : path.join(__dirname, '../../example')
+    directory : path.join(__dirname, '../sample')
 };
 
 exports.config = config;

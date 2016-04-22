@@ -10,13 +10,15 @@ describe('initializer', function() {
       it('should validate cmd line args and throw except if format not mapped', function() {
 
         var tests = [
-            { args : ['', '', 'new', 'my-blog'], valid : true, result: { createNew: true, arg: 'my-blog' } },
-            { args : ['', '', 'deploy'], valid : true, result: { deploy: true } },
+            { args : ['', '', 'new', 'my-blog'], valid : true, result: { name: constants.ARG_NEW, arg: 'my-blog' } },
+            { args : ['', '', 'build'], valid : true, result: { name: constants.ARG_BUILD } },
+            { args : ['', '', 'deploy'], valid : true, result: { name: constants.ARG_DEPLOY } },
             { args : ['', ''], valid : false },
             { args : ['', '', ''], valid : false },
             { args : ['', '', '', ''], valid : false },
             { args : ['', '', '', '', ''], valid : false },
             { args : ['', '', 'new'], valid : false },
+            { args : ['', '', 'build', ''], valid : false },
             { args : ['', '', 'deploy', ''], valid : false }
         ];
 
@@ -51,11 +53,11 @@ describe('initializer', function() {
         it('should validate if all mandatory options are available', function() {
 
             var tests = [
-                { config : { directory : 'a', awsAccessKeyId : 'b', awsSecretAccessKey : 'c', awsRegion: 'd', awsBucketName : 'e'}, valid : true},
-                { config : { directory : 'a', awsAccessKeyId : 'b', awsSecretAccessKey : 'c'}, valid : true},
-                { config : { directory : 'a' }, valid : true},
-                { config : { awsAccessKeyId : 'b', awsSecretAccessKey : 'c', awsBucketName : 'e'}, valid : false},
-                { config : { }, valid : false}
+                { config : { awsAccessKeyId : 'a', awsSecretAccessKey : 'b', awsRegion: 'c', awsBucketName : 'd'}, valid : true},
+                { config : { awsAccessKeyId : 'a', awsSecretAccessKey : 'b', awsRegion: 'c' }, valid : false},
+                { config : { awsBucketName : 'd'}, valid : true},
+                { config : { }, valid : false},
+                { config : { something: 'a' }, valid : false}
             ];
 
             tests.forEach(function(test) {

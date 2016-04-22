@@ -1,0 +1,6 @@
+{
+  "awsAccessKeyId" : "your_access_key",
+  "awsSecretAccessKey" : "your_secret_key",
+  "awsRegion": "your_region",
+  "awsBucketName" : "your_aws_bucket_name"
+}

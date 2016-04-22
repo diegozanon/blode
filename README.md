@@ -4,7 +4,7 @@ blode is a simple Node.js application to create static blogs. I've designed it f
 The Node.js application reads the blog posts written with the [Markdown](http://daringfireball.net/projects/markdown/) syntax and compile them to HTML. Since it's a SPA made with Angular, blode also pre-render the pages to improve SEO. For deployment, the content is gzipped and uploaded to Amazon S3.
 
 ## Why a static site generator and not Wordpress?
-You can use [Jekyll](http://jekyllrb.com/) or [another](http://www.sitepoint.com/6-static-blog-generators-arent-jekyll/) static website generator, but please, don't use Wordpress for blogging! Static websites don't need a dedicated server neither a database. This means an extremely fast and cheap website. Also, you don't need to worry about security and server updates. You can read more reasons [here](http://www.sitepoint.com/wordpress-vs-jekyll-might-want-make-switch/).
+You can use [Jekyll](http://jekyllrb.com/) or [another](http://www.sitepoint.com/6-static-blog-generators-arent-jekyll/) static website generator, but please, don't use Wordpress for blogging! Static websites don't need a dedicated server neither a database. A serverless blog means an extremely fast and cheap website. Also, you don't need to worry about security and server updates. You can read more reasons [here](http://www.sitepoint.com/wordpress-vs-jekyll-might-want-make-switch/).
 
 ## Features
 
@@ -21,14 +21,22 @@ You can use [Jekyll](http://jekyllrb.com/) or [another](http://www.sitepoint.com
 ```
 > npm install static-blode -g
 ```
+// TODO: not deployed yet to NPM
 
-## Configuration
+## How to use
 
 Below follows some instructions about how to use blode. If you have any doubt, please, file an issue and I'll try to help you.
 
-// TODO
+### Create a sample blog
 
-You need to create a config.json file at the same level of app.js with the following:
+The first step is to generate the blog sample files:
+```
+> blode new my-blog-folder
+```
+
+### Configuration
+
+You need to modify the config.json file the is located at root level of your blog. Fill the following properties:
 
 ```json
 {
@@ -39,29 +47,31 @@ You need to create a config.json file at the same level of app.js with the follo
 }
 ```
 
+### Deploy
+
+After modifying the raw markdown files inside the raw folder, deploy the blog with:
+```
+> blode deploy
+```
+
 ## Blog posts
 
 Blog posts should be created using the [Markdown](http://en.wikipedia.org/wiki/Markdown) markup language and you can use your favorite editor to this. If you don't have one, I suggest: [stackedit.io](https://stackedit.io)
 
-blode requires three things:
+blode requires that each post uses the following format:  
 
-// TODO: template has changed
+<pre>
+<code>
+Title: < Post Title >  
+Summary: < Summary of post. >  
+Tags: < TagX >  
+Date: < NOV 15, 2015 >  
+URL: < post-url >  
 
-- The first line must have the date of the post in the following format: yyyy-mm-dd
-- The second line must have a small summary of the blog post content.
-- The third line must have one or more tags that will be attached to the blog. E.g.: angularjs, javascript
+< ##  Post Title  >  
 
-## How to use
+< Here starts the content of your Post >  
+</code>
+</pre>
 
-```
-blode new my-blog-folder
-cd my-blog-folder
-blode deploy
-```
-
-1. When you run blode for the first time, it will create 4 folders for you - js, css, images and markdown - in the **input** folder.
-2. Place your content in the correspondent folders.
-3. Place your index.html (template of your file) at the root of the input folder.
-4. blode requires AngularJS for your site. Add its CDN in the header file of index.html or in the js folder.
-5. Execute blode. It'll move all files to the **output** folder minifying js/css and compiling Markdown posts.
-6. Grab all contents of the output folder and publish your blog. You can use Amazon S3 for this (it is cheap and easy to configure).
+**Note:** replace &lt; text &gt; by your data.

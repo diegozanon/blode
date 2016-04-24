@@ -24,8 +24,8 @@ describe('markdowner', function() {
               .then(function() {
 
                   var partialsDir = path.join(config.directory, constants.FOLDER_PARTIALS);
-                  var partialPath1 = partialsDir + '\\2015-11-15-post1.html';
-                  var partialPath2 = partialsDir + '\\2015-11-21-post2.html';
+                  var partialPath1 = path.join(partialsDir, '2015-11-15-post1.html');
+                  var partialPath2 = path.join(partialsDir, '2015-11-21-post2.html');
 
                   return readTwoFiles(partialPath1, partialPath2);
               });

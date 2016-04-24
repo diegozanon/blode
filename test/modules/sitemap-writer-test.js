@@ -1,4 +1,5 @@
 var common = require("../common");
+var path = require("path");
 var Q = require("q");
 var config = common.config;
 var constants = common.constants;
@@ -27,7 +28,7 @@ describe('sitemapWriter', function() {
             })
             .then(function() {
                 var sitemapDir = config.directory;
-                var sitemapPath = sitemapDir + '\\sitemap.xml';
+                var sitemapPath = path.join(sitemapDir, 'sitemap.xml');
 
                 return readOneFile(sitemapPath);
             });

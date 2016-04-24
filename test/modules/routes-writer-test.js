@@ -28,7 +28,7 @@ describe('routesWriter', function() {
               })
               .then(function() {
                   var routesDir = path.join(config.directory, constants.FOLDER_JS);
-                  var routesPath = routesDir + '\\routes.js';
+                  var routesPath = path.join(routesDir, 'routes.js');
 
                   return readOneFile(routesPath);
               });

@@ -1,4 +1,5 @@
 var common = require("../common");
+var path = require("path");
 var Q = require("q");
 var config = common.config;
 var constants = common.constants;
@@ -27,7 +28,7 @@ describe('rssWriter', function() {
             })
             .then(function() {
                 var rssDir = config.directory;
-                var rssPath = rssDir + '\\feed.xml';
+                var rssPath = path.join(rssDir, 'feed.xml');
 
                 return readOneFile(rssPath);
             });

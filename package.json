@@ -1,0 +1,43 @@
+{
+  "name": "blode",
+  "version": "1.0.0",
+  "description": "A simple Node.js application to create static blogs.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "mocha",
+    "watch": "gulp watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zanon-io/blode.git"
+  },
+  "author": "Diego Zanon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zanon-io/blode/issues"
+  },
+  "homepage": "https://github.com/zanon-io/blode#readme",
+  "devDependencies": {
+    "chai": "^3.4.0",
+    "chai-datetime": "^1.4.0",
+    "gulp": "^3.9.1",
+    "gulp-jshint": "^2.0.0",
+    "gulp-mocha": "^2.2.0",
+    "jshint": "^2.8.0",
+    "mocha": "^2.3.3"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.2.26",
+    "clean-css": "^3.4.12",
+    "jade": "^1.11.0",
+    "marked": "^0.3.5",
+    "moment": "^2.10.6",
+    "ncp": "^2.0.0",
+    "q": "^1.4.1",
+    "uglify-js": "^2.6.2"
+  },
+  "bin": {
+    "blode": "bin/blode.bin.js"
+  }
+}

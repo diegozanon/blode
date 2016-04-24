@@ -1,7 +1,19 @@
 # blode
-blode is a simple Node.js application to create static blogs. I've designed it for fun and to create my own blog. You can see the result here: [zanon.io](http://zanon.io).
+blode is a simple Node.js application to create static blogs. I've designed it to create my own blog ([zanon.io](http://zanon.io)) and I'll be glad to help if you want to use it too.
 
-The Node.js application reads the blog posts written with the [Markdown](http://daringfireball.net/projects/markdown/) syntax and compile them to HTML. Since it's a SPA made with Angular, blode also pre-render the pages to improve SEO. For deployment, the content is gzipped and uploaded to Amazon S3. If you don't want to host on AWS, you can manually use another service.
+## Quick Start
+
+```
+> npm install static-blode -g
+> blode new my-blog-folder
+> cd my-blog-folder
+> blode build
+> blode deploy
+```
+
+## How does it work?
+
+The Node.js application reads the blog posts written with the [Markdown](http://daringfireball.net/projects/markdown/) syntax and compile them to HTML. It also minifies CSS, JS, pre-render pages to improve SEO and gzip contents before uploading to Amazon S3. If you don't want to host on AWS, you can deploy manually to another service.
 
 ## Why a static site generator and not Wordpress?
 You can use [Jekyll](http://jekyllrb.com/) or [another](http://www.sitepoint.com/6-static-blog-generators-arent-jekyll/) static website generator, but please, don't use Wordpress for blogging! Static websites don't need a dedicated server neither a database. A serverless blog means an extremely fast and cheap website. Also, you don't need to worry about security and server updates. You can read more reasons [here](http://www.sitepoint.com/wordpress-vs-jekyll-might-want-make-switch/).
@@ -9,19 +21,18 @@ You can use [Jekyll](http://jekyllrb.com/) or [another](http://www.sitepoint.com
 ## Features
 
 - Compiles Markdown files to HTML
-- Uses single-page application using AngularJS
+- Uses single-page application with AngularJS
 - Pre-render pages
 - Adds blog posts filters by tags
 - Minifies CSS/JS
 - gzip and upload to Amazon S3
-- Updates the RSS file
+- Updates the RSS and sitemap files
 
 ## Installing
 
 ```
 > npm install static-blode -g
 ```
-// TODO: not deployed yet to NPM
 
 ## How to use
 
@@ -32,19 +43,19 @@ Below follows some instructions about how to use blode. If you have any doubt, p
 The first step is to generate the blog sample files:
 ```
 > blode new my-blog-folder
+> cd my-blog-folder
 ```
 
 ### Build files
 
-The following command will render all markdown files, update the sitemap, RSS and additional files for Angular.
+The following command will render all markdown files, update the sitemap, RSS and update additional files for Angular.
 ```
-> cd my-blog-folder
 > blode build
 ```
 
 ### Configuration
 
-If you want to deploy you blog on Amazon S3, you need to modify the config.json file the is located at root level of your blog. Fill the following properties:
+If you want to deploy your blog on Amazon S3, you need to modify the config.json file that is located at the root level of your blog folder. Fill the following properties:
 
 ```json
 {
@@ -54,6 +65,10 @@ If you want to deploy you blog on Amazon S3, you need to modify the config.json 
   "awsBucketName" : "your_aws_bucket_name"
 }
 ```
+
+The only mandatory option is the **awsBucketName** (that must match your domain name). The rest of the settings can be configured with shared files or environment variables (more [here](http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/node-configuring.html)).
+
+For a tutorial on how to host a static blog in Amazon S3, you can read [here](http://docs.aws.amazon.com/gettingstarted/latest/swh/website-hosting-intro.html).
 
 ### Deploy
 

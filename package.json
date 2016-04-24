@@ -1,6 +1,6 @@
 {
   "name": "static-blode",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple Node.js application to create static blogs.",
   "main": "index.js",
   "scripts": {

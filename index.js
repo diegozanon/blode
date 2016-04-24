@@ -26,8 +26,6 @@ exports.init = function() {
   }
 };
 
-exports.init();
-
 function createNew(name) {
 
   require("./lib/sample-creator").create(name, function(err) {

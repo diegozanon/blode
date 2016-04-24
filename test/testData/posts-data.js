@@ -1,3 +1,5 @@
+var os = require('os');
+
 exports.posts = function() {
 
     var title1 = 'Post1';
@@ -10,8 +12,8 @@ exports.posts = function() {
     var date2 = 'NOV 21, 2015';
     var url1 = 'post1';
     var url2 = 'post2';
-    var content1 = '## Post1 Title  \r\r[blode](https://github.com/zanon-io/blode) was created to automate the build of [zanon.io](http://zanon.io)';
-    var content2 = '## Post2 Title  \r\r[blode](https://github.com/zanon-io/blode) was created to automate the build of [zanon.io](http://zanon.io)';
+    var content1 = '## Post1 Title  ' + os.EOL + os.EOL + '[blode](https://github.com/zanon-io/blode) was created to automate the build of [zanon.io](http://zanon.io)';
+    var content2 = '## Post2 Title  ' + os.EOL + os.EOL + '[blode](https://github.com/zanon-io/blode) was created to automate the build of [zanon.io](http://zanon.io)';
 
     var post1 = {
         title : title1,

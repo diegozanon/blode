@@ -1,38 +1,16 @@
 var constants = require('./constants');
 var utils = require('./utils');
-var binPath = require('phantomjs').path;
-var childProcess = require('child_process');
 var fs = require('fs');
-var path = require('path');
 var Q = require('q');
 
 exports.prerender = function(config, posts, callback) {
 
-  var args = getArguments(config, posts);
+  var pages = getPages(config, posts);
+  var indexPath = config.directory + '\\' + constants.FILE_NAME_HTML_INDEX;
+  var indexContents = fs.readFileSync(indexPath).toString();
 
-  // Create Promises
-  var removePreviousPostsP = Q.denodeify(removePreviousPosts);
-  var prerenderPagesP = Q.denodeify(prerenderPages);
-  var fixPrerenderedFilesP = Q.denodeify(fixPrerenderedFiles);
-
-  removePreviousPostsP(config)
-    .then(function () {
-      return prerenderPagesP(args);
-    })
-    .then(function () {
-      return fixPrerenderedFilesP(args);
-    })
-    .catch(function (err) {
-      callback(err);
-    })
-    .done(function () {
-      callback(null, posts);
-    });
-};
-
-function prerenderPages(args, callback) {
-  Q.all(args.map(function(arg) {
-      return Q.nfcall(execPhantom, arg.pageName, arg.outputFile, arg.outputPath);
+  Q.all(pages.map(function(page) {
+      return Q.nfcall(prerenderPage, page, indexContents);
   }))
   .then(function() {
       callback(null);
@@ -40,101 +18,47 @@ function prerenderPages(args, callback) {
   .catch(function(err) {
       callback(err);
   });
-}
+};
 
-function execPhantom(pageName, outputFile, outputPath, callback) {
+function getPages(config, posts) {
 
-  var childArgs = [
-    path.join(__dirname, constants.PHANTOMJS_SCRIPT),
-    pageName,
-    outputFile,
-    outputPath
-  ];
-
-  childProcess.execFile(binPath, childArgs, function(err, stdout, stderr) {
-    console.log(stdout);
-    callback(err);
-  });
-}
-
-function getArguments(config, posts) {
-
-  var args = [];
+  var pages = [];
+  var dir = config.directory;
 
   posts.forEach(function(post) {
 
-    var arg = {
-      pageName: constants.STAGING_HOSTED_URL + '/' +  constants.FOLDER_POSTS.replace('\\', '') + '/' + post.url,
-      outputFile: post.url,
-      outputPath: config.directory + constants.FOLDER_POSTS
-    };
+    var isoDate = utils.extractIsoDate(post.date);
+    var partialName = isoDate + '-' + post.url + '.html';
 
-    args.push(arg);
-  });
-
-  var index = {
-    pageName: constants.STAGING_HOSTED_URL,
-    outputFile: constants.FILE_NAME_HTML_INDEX,
-    outputPath: config.directory + constants.FOLDER_PRERENDERED
-  };
-
-  args.push(index);
-
-  var notFound = {
-    pageName: constants.STAGING_HOSTED_URL + '/' + 'page-that-does-not-exist',
-    outputFile: constants.FILE_NAME_PRERENDERED_404,
-    outputPath: config.directory + constants.FOLDER_PRERENDERED
-  };
-
-  args.push(notFound);
-
-  return args;
-}
-
-// This is needed. Otherwise, phanthomjs will see the old version of the file instead of the new content
-function removePreviousPosts(config, callback) {
-
-  var dir = config.directory + constants.FOLDER_POSTS;
-
-  fs.readdir(dir, function(err, files) {
-
-    if (err)
-      callback(err);
-
-    Q.all(files.map(function(file) {
-
-      var path = dir + '\\' + file;
-      return Q.nfcall(fs.unlink, path);
-    }))
-    .then(function() {
-      callback(null);
-    })
-    .catch(function(err) {
-      callback(err);
+    pages.push({ // post
+      contentPath: dir + constants.FOLDER_PARTIALS + '\\' + partialName,
+      outputPath: dir + constants.FOLDER_POSTS + '\\' + post.url
     });
   });
+
+  pages.push({ // index
+    contentPath: dir + constants.FOLDER_PARTIALS + '\\' + constants.FILE_NAME_HTML_POSTS,
+    outputPath: dir + constants.FOLDER_PRERENDERED + '\\' + constants.FILE_NAME_HTML_INDEX
+  });
+
+  pages.push({ // notFound
+    contentPath: dir + constants.FOLDER_PARTIALS + '\\' + constants.FILE_NAME_HTML_404,
+    outputPath: dir + constants.FOLDER_PRERENDERED + '\\' + constants.FILE_NAME_PRERENDERED_404
+  });
+
+  return pages;
 }
 
-function fixPrerenderedFiles(args, callback) {
+function prerenderPage(page, indexContents, callback) {
 
-  Q.all(args.map(function(arg) {
+  var fileName = page.outputPath;
 
-    var fileName = arg.outputPath + '\\' + arg.outputFile;
-    var originals = [
-        constants.REPLACE_NGVIEW,
-        constants.REPLACE_NGCLOAK_CLASS
-    ];
-    var replacements = [
-        constants.REPLACE_NGVIEW_NGCLOAK,
-        constants.REPLACE_NGCLOAK_INVALID_CLASS
-    ];
+  // save page with index.html content
+  fs.writeFile(fileName, indexContents, function(err) {
 
-    return Q.nfcall(utils.replaceFileContent, fileName, originals, replacements);
-  }))
-  .then(function() {
-    callback(null);
-  })
-  .catch(function(err) {
-    callback(err);
+    var original = constants.REPLACE_NGVIEW_REPLACE_SPOT;
+    var replacement = fs.readFileSync(page.contentPath).toString();
+
+    utils.replaceFileContent(fileName, original, replacement, callback)
   });
 }

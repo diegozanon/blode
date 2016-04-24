@@ -1,4 +1,5 @@
 var constants = require('./constants');
+var path = require('path');
 
 exports.getCmd = function() {
 
@@ -30,7 +31,8 @@ exports.getCmd = function() {
 exports.getConfig = function() {
 
     try {
-        return require('../config');
+        var configPath = path.join(path.resolve("."), 'config');
+        return require(configPath);
     }
     catch (e) {
         console.error(constants.MSG_ERROR_CONFIG_NOT_FOUND);

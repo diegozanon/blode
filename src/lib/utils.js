@@ -72,15 +72,13 @@ exports.renderWithJade = function(files, jadeTemplate, callback) {
     });
 }
 
-exports.replaceFileContent = function(fileName, originals, replacements, callback) {
+exports.replaceFileContent = function(fileName, original, replacement, callback) {
 
     fs.readFile(fileName, 'utf8', function (err, data) {
         if (err)
             callback(err);
 
-        for (var i = 0; i < originals.length; i++) {
-            data = data.replace(new RegExp(originals[i], 'g'), replacements[i]); // replace multiple occurrences
-        }
+        data = data.replace(new RegExp(original, 'g'), replacement);
 
         fs.writeFile(fileName, data, 'utf8', callback);
     });

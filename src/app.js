@@ -48,6 +48,7 @@ function build() {
   var writeRoutes = Q.denodeify(require("./lib/routes-writer").writeRoutes);
   var writeRss = Q.denodeify(require("./lib/rss-writer").writeRss);
   var writeSitemap = Q.denodeify(require("./lib/sitemap-writer").writeSitemap);
+  var prerender = Q.denodeify(require("./lib/prerenderer").prerender);
 
   var config = {
     directory: path.resolve(".")
@@ -71,6 +72,10 @@ function build() {
       console.log(constants.MSG_DEBUG_SITEMAP);
       return writeSitemap(config, posts);
     })
+    .then(function (posts) {
+      console.log(constants.MSG_DEBUG_PRERENDER);
+      return prerender(config, posts);
+    })
     .catch(function (err) {
       console.error(err);
     })
@@ -81,32 +86,19 @@ function build() {
 
 function deploy() {
 
-  // Create Promises
-  var uploadToS3 = Q.denodeify(require("./lib/s3-uploader").uploadToS3);
-  var prerender = Q.denodeify(require("./lib/prerenderer").prerender);
+  var uploader = require("./lib/s3-uploader");
 
   // Validate configuration
   var config = initializer.getConfig();
   config.directory = path.resolve(".");
   initializer.validate(config); // throws an error if invalid
 
-  console.log(constants.MSG_DEBUG_START_DEPLOY);
   console.log(constants.MSG_DEBUG_UPLOADER);
-  var uploadPrerendered = false;
-  uploadToS3(config, uploadPrerendered)
-    .then(function (posts) {
-      console.log(constants.MSG_DEBUG_PRERENDER);
-      return prerender(config, posts);
-    })
-    .then(function (posts) {
-      console.log(constants.MSG_DEBUG_UPLOADER_PRERENDERED);
-      uploadPrerendered = true;
-      return uploadToS3(config, uploadPrerendered);
-    })
-    .catch(function (err) {
-      console.error(err);
-    })
-    .done(function () {
-      console.log(constants.MSG_DEBUG_FINISHED_DEPLOY);
-    });
+  uploader.uploadToS3(config, function(err) {
+
+    if (err)
+      throw err;
+
+    console.log(constants.MSG_DEBUG_FINISHED_DEPLOY);
+  });
 }

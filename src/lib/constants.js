@@ -7,19 +7,16 @@ function define(name, value) {
 }
 
 /* DEBUG MSGs */
-define('MSG_DEBUG_START_DEPLOY', 'Starting deploying.');
-define('MSG_DEBUG_FINISHED_DEPLOY', 'Finished deploying.');
 define('MSG_DEBUG_FINISHED_CREATING', 'The blog sample was created.');
 define('MSG_DEBUG_FINISHED_BUILD', 'Finished building.');
+define('MSG_DEBUG_FINISHED_DEPLOY', 'Finished deploying.');
 define('MSG_DEBUG_MARKDOWNER', 'Parsing markdown posts.');
 define('MSG_DEBUG_POSTSLIST', 'Writing posts list file.');
 define('MSG_DEBUG_ROUTES', 'Writing routes file.');
 define('MSG_DEBUG_RSS', 'Writing RSS file.');
 define('MSG_DEBUG_SITEMAP', 'Writing sitemap.');
 define('MSG_DEBUG_PRERENDER', 'Pre-rendering.');
-define('MSG_DEBUG_PRERENDER_FILE_CREATED', 'File "{0}" was pre-rendered.');
 define('MSG_DEBUG_UPLOADER', 'Uploading to S3.');
-define('MSG_DEBUG_UPLOADER_PRERENDERED', 'Uploading the pre-rendered files to S3.');
 
 /* Partial MSGS */
 define('MSG_DOC_REPO', 'Follow the documentation available at: https://github.com/zanon-io/blode');
@@ -29,7 +26,6 @@ define('MSG_ERROR_CONFIG_NOT_FOUND', 'config.json not found in root directory or
 define('MSG_ERROR_INVALID_ARGS', 'Invalid arguments.\n' + this.MSG_DOC_REPO);
 define('MSG_ERROR_INVALID_CONFIG', 'config.json doesn\'t have all required configuration.\n' + this.MSG_DOC_REPO);
 define('MSG_ERROR_INVALID_RAW', 'Raw file "{0}" is invalid.\n' + this.MSG_DOC_REPO);
-define('MSG_ERROR_INVALID_PHANTOM_ARGS', 'Arguments should be passed as: <script_path> <page_name> <output_name> <output_path>');
 
 /* Arguments */
 define('ARG_NEW', 'new');
@@ -94,15 +90,11 @@ define('FILE_XML_SITEMAP', '\\' + this.FILE_NAME_XML_SITEMAP);
 
 /* Configs */
 define('JADE_OPTIONS', { pretty : true });
-define('STAGING_HOSTED_URL', 'http://localhost');
 define('PHANTOMJS_SCRIPT', 'phantomjs-script.js');
 define('AWS_ACL', 'public-read');
 
 /* Replace Content */
-define('REPLACE_NGVIEW', 'ng-view-background ng-scope');
-define('REPLACE_NGVIEW_NGCLOAK', 'ng-view-background ng-scope ng-cloak');
-define('REPLACE_NGCLOAK_CLASS', '\\.ng-cloak'); // scaped dot for regex parser
-define('REPLACE_NGCLOAK_INVALID_CLASS', '.ng-cloak-invalid');
+define('REPLACE_NGVIEW_REPLACE_SPOT', '<!-- ng-view-replace-spot -->');
 
 /* Content-Types */
 define('CONTENT_TYPE_CSS', 'text/css');

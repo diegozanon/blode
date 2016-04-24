@@ -7,7 +7,7 @@ exports.prerender = function(config, posts, callback) {
 
   var pages = getPages(config, posts);
   var indexPath = config.directory + '\\' + constants.FILE_NAME_HTML_INDEX;
-  var indexContents = fs.readFileSync(indexPath).toString();
+  var indexContents = fs.readFileSync(indexPath);
 
   Q.all(pages.map(function(page) {
       return Q.nfcall(prerenderPage, page, indexContents);

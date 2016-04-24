@@ -1,6 +1,8 @@
 # blode
 blode is a simple Node.js application to create static blogs. I've designed it to create my own blog ([zanon.io](http://zanon.io)) and I'll be glad to help if you want to use it too.
 
+[![Build Status](https://travis-ci.org/zanon-io/blode.svg?branch=master)](https://travis-ci.org/zanon-io/blode)
+
 ## Quick Start
 
 ```

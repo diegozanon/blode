@@ -10,4 +10,4 @@ exports.create = function(name, callback) {
   ncp(source, destination, function (err) {
     callback(err);
   });
-}
+};

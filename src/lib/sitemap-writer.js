@@ -20,4 +20,4 @@ exports.writeSitemap = function(config, posts, callback) {
   utils.renderWithJade(file, jadeTemplate, function(err) {
       callback(err, posts);
   });
-}
+};

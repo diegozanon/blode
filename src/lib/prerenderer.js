@@ -59,6 +59,6 @@ function prerenderPage(page, indexContents, callback) {
     var original = constants.REPLACE_NGVIEW_REPLACE_SPOT;
     var replacement = fs.readFileSync(page.contentPath).toString();
 
-    utils.replaceFileContent(fileName, original, replacement, callback)
+    utils.replaceFileContent(fileName, original, replacement, callback);
   });
 }

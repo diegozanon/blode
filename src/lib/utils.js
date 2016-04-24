@@ -9,14 +9,14 @@ exports.mergeJSON = function(obj1, obj2) {
 
     var result = {};
 
-    for(var key in obj1)
-        result[key] = obj1[key];
+    for(var key1 in obj1)
+        result[key1] = obj1[key1];
 
-    for(var key in obj2)
-        result[key] = obj2[key];
+    for(var key2 in obj2)
+        result[key2] = obj2[key2];
 
     return result;
-}
+};
 
 exports.getPosts = function(config, callback) {
 
@@ -30,8 +30,8 @@ exports.getPosts = function(config, callback) {
             return Q.nfcall(fs.readFile, fullPath, 'utf8')
                 .then(function(fileContents) {
                     return extractPostData(file, fileContents);
-                })
-        }))
+                });
+        }));
     })
     .then(function(results) {
         callback(null, results);
@@ -39,19 +39,19 @@ exports.getPosts = function(config, callback) {
     .catch(function (err) {
         callback(err);
     });
-}
+};
 
 exports.extractIsoDate = function(dateStr) {
 
     // Input: NOV 08, 2015 - Output: 2015-11-08
     return moment.utc(dateStr, 'MMM DD, YYYY').format('YYYY-MM-DD').toString();
-}
+};
 
 exports.extractLongDate = function(dateStr) {
 
     // Input: NOV 08, 2015 - Output: Sun, 08 Nov 2015 00:00:00 UTC
     return moment.utc(dateStr, 'MMM DD, YYYY').format('ddd, DD MMM YYYY 00:00:00 +0000').toString();
-}
+};
 
 exports.renderWithJade = function(files, jadeTemplate, callback) {
 
@@ -61,7 +61,7 @@ exports.renderWithJade = function(files, jadeTemplate, callback) {
 
         return Q.nfcall(jade.renderFile, jadeTemplate, jadeArgs)
             .then(function(html) {
-                return Q.nfcall(fs.writeFile, file.name, html)
+                return Q.nfcall(fs.writeFile, file.name, html);
             });
     }))
     .then(function() {
@@ -70,7 +70,7 @@ exports.renderWithJade = function(files, jadeTemplate, callback) {
     .catch(function(err) {
         callback(err);
     });
-}
+};
 
 exports.replaceFileContent = function(fileName, original, replacement, callback) {
 
@@ -82,7 +82,7 @@ exports.replaceFileContent = function(fileName, original, replacement, callback)
 
         fs.writeFile(fileName, data, 'utf8', callback);
     });
-}
+};
 
 function extractPostData(fileName, fileContents) {
 

@@ -8,4 +8,4 @@ exports.routes = function(callback) {
     var routesPath = path.join(__dirname, './resources/routes.txt');
 
     common.readOneFile(routesPath, callback);
-}
+};

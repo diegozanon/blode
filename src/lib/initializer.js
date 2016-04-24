@@ -8,25 +8,25 @@ exports.getCmd = function() {
     return {
       name: constants.ARG_NEW,
       arg: process.argv[3]
-    }
+    };
   }
   // node app build
   else if (process.argv.length === 3 && process.argv[2] === constants.ARG_BUILD) {
     return {
       name: constants.ARG_BUILD
-    }
+    };
   }
   // node app deploy
   else if (process.argv.length === 3 && process.argv[2] === constants.ARG_DEPLOY) {
     return {
       name: constants.ARG_DEPLOY
-    }
+    };
   }
   // not mapped
   else {
     throw constants.MSG_ERROR_INVALID_ARGS;
   }
-}
+};
 
 exports.getConfig = function() {
 

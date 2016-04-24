@@ -31,7 +31,7 @@ describe('initializer', function() {
             } else {
 
                 var getCmd = function() {
-                    initializer.getCmd()
+                    initializer.getCmd();
                 };
 
                 expect(getCmd).to.throw(constants.MSG_ERROR_INVALID_ARGS);
@@ -67,7 +67,7 @@ describe('initializer', function() {
                 } else {
 
                     var validate = function() {
-                        initializer.validate(test.config)
+                        initializer.validate(test.config);
                     };
 
                     expect(validate).to.throw(constants.MSG_ERROR_INVALID_CONFIG);

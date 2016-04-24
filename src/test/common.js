@@ -42,7 +42,7 @@ exports.readOneFile = function(fileName, callback) {
 
         callback(err, contents);
     });
-}
+};
 
 exports.readTwoFiles = function(file1, file2, callback) {
 
@@ -59,7 +59,7 @@ exports.readTwoFiles = function(file1, file2, callback) {
             callback(err, [contents1, contents2]);
         });
     });
-}
+};
 
 exports.testWithPromises = function(promiseA, promiseB, test, done) {
 
@@ -70,4 +70,4 @@ exports.testWithPromises = function(promiseA, promiseB, test, done) {
     .done(function() {
         done();
     });
-}
+};

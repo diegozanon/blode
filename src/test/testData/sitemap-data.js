@@ -6,4 +6,4 @@ exports.sitemap = function(callback) {
     var sitemapPath = path.join(__dirname, './resources/sitemap.xml');
 
     common.readOneFile(sitemapPath, callback);
-}
+};

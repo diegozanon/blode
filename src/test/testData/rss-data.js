@@ -6,4 +6,4 @@ exports.rss = function(callback) {
     var rssPath = path.join(__dirname, './resources/feed.xml');
 
     common.readOneFile(rssPath, callback);
-}
+};

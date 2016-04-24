@@ -7,4 +7,4 @@ exports.partials = function(callback) {
     var partialPath2 = path.join(__dirname, './resources/partial2.html');
 
     common.readTwoFiles(partialPath1, partialPath2, callback);
-}
+};

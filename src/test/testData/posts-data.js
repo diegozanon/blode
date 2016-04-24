@@ -32,4 +32,4 @@ exports.posts = function() {
     };
 
     return [post1, post2];
-}
+};

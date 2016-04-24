@@ -4,6 +4,6 @@ Tags: Tag1, Tag2
 Date: NOV 21, 2015
 URL: post2
 
-## Post2 Title
+## Post2 Title  
 
 [blode](https://github.com/zanon-io/blode) was created to automate the build of [zanon.io](http://zanon.io)

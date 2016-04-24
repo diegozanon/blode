@@ -1,4 +1,5 @@
 var common = require("../common");
+var Q = require('q');
 var expect = common.expect;
 var utils = common.utils;
 var config = common.config;
@@ -34,13 +35,14 @@ describe('utils', function() {
 
             var expectedPosts = postsData.posts();
 
-            utils.getPosts(config, function(err, actualPosts) {
-
+            Q.nfcall(utils.getPosts, config)
+            .then(function(actualPosts) {
                 expect(actualPosts.length).to.be.equal(expectedPosts.length);
                 expect(JSON.stringify(actualPosts)).to.be.equal(JSON.stringify(expectedPosts));
-
                 done();
-            });
+            }).catch(function(e) {
+                done(e);
+            })
         });
     });
 

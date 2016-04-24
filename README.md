@@ -79,7 +79,7 @@ Deploy is done to AWS S3 using:
 
 ## Blog posts
 
-Blog posts should be created using the [Markdown](http://en.wikipedia.org/wiki/Markdown) markup language and you can use your favorite editor to this. If you don't have one, I suggest: [stackedit.io](https://stackedit.io)
+Blog posts should be created inside the **raw** folder using the [Markdown](http://en.wikipedia.org/wiki/Markdown) markup language and you can use your favorite editor for this. If you don't have one, I suggest: [stackedit.io](https://stackedit.io)
 
 blode requires that each post uses the following format:  
 

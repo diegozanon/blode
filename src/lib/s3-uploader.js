@@ -3,6 +3,7 @@ var utils = require('./utils');
 var AWS = require('aws-sdk');
 var fs = require('fs');
 var Q = require('q');
+var zlib = require('zlib');
 
 exports.uploadToS3 = function(config, callback) {
 
@@ -24,7 +25,7 @@ exports.uploadToS3 = function(config, callback) {
                 return Q.nfcall(uploadFile, s3, config, file);
             }))
             .then(function() {
-                callback(null, posts);
+                callback(null);
             })
             .catch(function(err) {
                 callback(err);
@@ -58,31 +59,36 @@ function getFilesToUpload(config, posts, callback) {
     files.push({
         Key: constants.FILE_NAME_HTML_INDEX,
         Body: fs.readFileSync(config.directory + constants.FILE_HTML_INDEX_PRERENDERED),
-        ContentType: constants.CONTENT_TYPE_HTML
+        ContentType: constants.CONTENT_TYPE_HTML,
+        gzip: true
     });
 
     files.push({
         Key: constants.FILE_NAME_PRERENDERED_404,
         Body: fs.readFileSync(config.directory + constants.FILE_HTML_404_PRERENDERED),
-        ContentType: constants.CONTENT_TYPE_HTML
+        ContentType: constants.CONTENT_TYPE_HTML,
+        gzip: true
     });
 
     files.push({
         Key: constants.FILE_NAME_ICO_FAVICON,
         Body: fs.readFileSync(config.directory + constants.FILE_ICO_FAVICON),
-        ContentType: constants.CONTENT_TYPE_ICO
+        ContentType: constants.CONTENT_TYPE_ICO,
+        gzip: false
     });
 
     files.push({
         Key: constants.FILE_NAME_XML_RSS,
         Body: fs.readFileSync(config.directory + constants.FILE_XML_RSS),
-        ContentType: constants.CONTENT_TYPE_XML
+        ContentType: constants.CONTENT_TYPE_XML,
+        gzip: true
     });
 
     files.push({
         Key: constants.FILE_NAME_XML_SITEMAP,
         Body: fs.readFileSync(config.directory + constants.FILE_XML_SITEMAP),
-        ContentType: constants.CONTENT_TYPE_XML
+        ContentType: constants.CONTENT_TYPE_XML,
+        gzip: true
     });
 
     /* Partials files */
@@ -95,7 +101,8 @@ function getFilesToUpload(config, posts, callback) {
         files.push({
             Key: constants.FOLDER_AWS_PARTIALS + partialName,
             Body: fs.readFileSync(config.directory + constants.FOLDER_PARTIALS + '\\' + partialName),
-            ContentType: constants.CONTENT_TYPE_HTML
+            ContentType: constants.CONTENT_TYPE_HTML,
+            gzip: true
         });
     });
 
@@ -104,21 +111,25 @@ function getFilesToUpload(config, posts, callback) {
     files.push({
         Key: constants.FOLDER_AWS_PARTIALS + constants.FILE_NAME_HTML_404,
         Body: fs.readFileSync(config.directory + constants.FILE_HTML_404),
-        ContentType: constants.CONTENT_TYPE_HTML
+        ContentType: constants.CONTENT_TYPE_HTML,
+        gzip: true
     });
 
     files.push({
         Key: constants.FOLDER_AWS_PARTIALS + constants.FILE_NAME_HTML_POSTS,
         Body: fs.readFileSync(config.directory + constants.FILE_HTML_POSTS),
-        ContentType: constants.CONTENT_TYPE_HTML
+        ContentType: constants.CONTENT_TYPE_HTML,
+        gzip: true
     });
 
     /* Posts files */
+
     posts.forEach(function(post) {
         files.push({
             Key: constants.FOLDER_AWS_POSTS + post.url,
             Body: fs.readFileSync(config.directory + constants.FOLDER_POSTS + '\\' + post.url),
-            ContentType: constants.CONTENT_TYPE_HTML
+            ContentType: constants.CONTENT_TYPE_HTML,
+            gzip: true
         });
     });
 
@@ -127,31 +138,36 @@ function getFilesToUpload(config, posts, callback) {
     files.push({
         Key: constants.FOLDER_AWS_JS + constants.FILE_NAME_JS_APP,
         Body: fs.readFileSync(config.directory + constants.FILE_JS_APP),
-        ContentType: constants.CONTENT_TYPE_JS
+        ContentType: constants.CONTENT_TYPE_JS,
+        gzip: true
     });
 
     files.push({
         Key: constants.FOLDER_AWS_JS + constants.FILE_NAME_JS_CONTROLLERS,
         Body: fs.readFileSync(config.directory + constants.FILE_JS_CONTROLLERS),
-        ContentType: constants.CONTENT_TYPE_JS
+        ContentType: constants.CONTENT_TYPE_JS,
+        gzip: true
     });
 
     files.push({
         Key: constants.FOLDER_AWS_JS + constants.FILE_NAME_JS_DIRECTIVES,
         Body: fs.readFileSync(config.directory + constants.FILE_JS_DIRECTIVES),
-        ContentType: constants.CONTENT_TYPE_JS
+        ContentType: constants.CONTENT_TYPE_JS,
+        gzip: true
     });
 
     files.push({
         Key: constants.FOLDER_AWS_JS + constants.FILE_NAME_JS_NGCLOAK,
         Body: fs.readFileSync(config.directory + constants.FILE_JS_NGCLOAK),
-        ContentType: constants.CONTENT_TYPE_JS
+        ContentType: constants.CONTENT_TYPE_JS,
+        gzip: true
     });
 
     files.push({
         Key: constants.FOLDER_AWS_JS + constants.FILE_NAME_JS_ROUTES,
         Body: fs.readFileSync(config.directory + constants.FILE_JS_ROUTES),
-        ContentType: constants.CONTENT_TYPE_JS
+        ContentType: constants.CONTENT_TYPE_JS,
+        gzip: true
     });
 
     /* CSS files */
@@ -159,7 +175,8 @@ function getFilesToUpload(config, posts, callback) {
     files.push({
         Key: constants.FOLDER_AWS_CSS + constants.FILE_NAME_CSS_SITE,
         Body: fs.readFileSync(config.directory + constants.FILE_CSS_SITE),
-        ContentType: constants.CONTENT_TYPE_CSS
+        ContentType: constants.CONTENT_TYPE_CSS,
+        gzip: true
     });
 
     /* Image files */
@@ -208,6 +225,10 @@ function getImagesToUpload(config, callback) {
 
             images = images.concat(files2);
 
+            images.forEach(function(image) {
+              image.gzip = false;
+            });
+
             callback(null, images);
         });
     });
@@ -226,6 +247,10 @@ function getJsAssetsToUpload(config, callback) {
             callback(err);
 
         assets = assets.concat(files);
+
+        assets.forEach(function(asset) {
+          asset.gzip = true;
+        });
 
         callback(null, assets);
     });
@@ -262,5 +287,14 @@ function uploadFile(s3, config, params, callback) {
     params.Bucket = config.awsBucketName;
     params.ACL = constants.AWS_ACL;
 
-    s3.upload(params, callback);
+    if (!params.gzip) {
+      s3.upload(params, callback);
+    } else {
+      zlib.gzip(params.Body, function (err, result) {
+         if (err) throw err;
+         params.Body = result;
+         params.ContentEncoding = 'gzip';
+         s3.upload(params, callback);
+      });
+    }
 }

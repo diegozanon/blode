@@ -2,9 +2,9 @@
   "name": "blode",
   "version": "1.0.0",
   "description": "A simple Node.js application to create static blogs.",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node index.js",
     "test": "mocha",
     "watch": "gulp watch"
   },

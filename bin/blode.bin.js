@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-require('../app').init();
+require('../index').init();

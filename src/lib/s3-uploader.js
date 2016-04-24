@@ -1,7 +1,9 @@
 var constants = require('./constants');
 var utils = require('./utils');
 var AWS = require('aws-sdk');
+var CleanCSS = require('clean-css');
 var fs = require('fs');
+var UglifyJS = require('uglify-js');
 var Q = require('q');
 var zlib = require('zlib');
 
@@ -21,6 +23,12 @@ exports.uploadToS3 = function(config, callback) {
             if (err)
                 callback(err);
 
+            // minify, if necessary
+            files.forEach(function(file) {
+              minify(file);
+            });
+
+            // upload
             Q.all(files.map(function(file) {
                 return Q.nfcall(uploadFile, s3, config, file);
             }))
@@ -282,6 +290,20 @@ function getFilesToUploadInDirectory(directory, awsFolder, contentType, callback
     });
 }
 
+function minify(params) {
+
+  switch (params.ContentType) {
+    case constants.CONTENT_TYPE_JS:
+      params.Body = UglifyJS.minify(params.Body.toString('utf8'), {fromString: true}).code;
+      break;
+    case constants.CONTENT_TYPE_CSS:
+      params.Body = new CleanCSS().minify(params.Body.toString('utf8')).styles;
+      break;
+    default:
+      break;
+  }
+}
+
 function uploadFile(s3, config, params, callback) {
 
     params.Bucket = config.awsBucketName;
@@ -291,10 +313,10 @@ function uploadFile(s3, config, params, callback) {
       s3.upload(params, callback);
     } else {
       zlib.gzip(params.Body, function (err, result) {
-         if (err) throw err;
-         params.Body = result;
-         params.ContentEncoding = 'gzip';
-         s3.upload(params, callback);
+        if (err) throw err;
+        params.Body = result;
+        params.ContentEncoding = 'gzip';
+        s3.upload(params, callback);
       });
     }
 }

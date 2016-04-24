@@ -1,6 +1,6 @@
 var ctrls = angular.module('exampleControllers', []);
 
-ctrls.controller('MainController', function($scope) {
+ctrls.controller('MainController', ['$scope', function($scope) {
 
 	$scope.active = {
 		all: true,
@@ -15,7 +15,7 @@ ctrls.controller('MainController', function($scope) {
 
 		$scope.active[filter] = true;
 	};
-});
+}]);
 
 // Empty controllers
 ctrls.controller('PostsController', function() {});

@@ -5,7 +5,7 @@ var exampleApp = angular.module('exampleApp', [
 ]);
 
 exampleApp.run(function($rootScope) {
-    $rootScope.$on('$locationChangeSuccess', function (event, next, current) {
+    $rootScope.$on("$routeChangeSuccess", function(event, current, previous) {
         $rootScope.title = current.$$route.title ? current.$$route.title + ' - ' : '';
     });
 });

@@ -5,19 +5,23 @@ angular.module('exampleApp').config(['$routeProvider', '$locationProvider',
       // partials
       .when('/', {
         templateUrl: '/partials/posts.html',
-        controller: 'PostsController'
+        controller: 'PostsController',
+        title: ''
       })
       .when('/404', {
         templateUrl: '/partials/404.html',
-        controller: '404Controller'
+        controller: '404Controller',
+        title: 'Page not Found'
       })
 
       // posts
       .when('/posts/post2', {
-        templateUrl: '/partials/2015-11-21-post2.html'
+        templateUrl: '/partials/2015-11-21-post2.html',
+        title: 'Post2'
       })
       .when('/posts/post1', {
-        templateUrl: '/partials/2015-11-15-post1.html'
+        templateUrl: '/partials/2015-11-15-post1.html',
+        title: 'Post1'
       })
 
       // 404

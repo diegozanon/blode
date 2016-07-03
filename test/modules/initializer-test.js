@@ -12,6 +12,7 @@ describe('initializer', function() {
         var tests = [
             { args : ['', '', 'new', 'my-blog'], valid : true, result: { name: constants.ARG_NEW, arg: 'my-blog' } },
             { args : ['', '', 'build'], valid : true, result: { name: constants.ARG_BUILD } },
+            { args : ['', '', 'run-local'], valid : true, result: { name: constants.ARG_RUN_LOCAL } },
             { args : ['', '', 'publish'], valid : true, result: { name: constants.ARG_PUBLISH } },
             { args : ['', ''], valid : false },
             { args : ['', '', ''], valid : false },
@@ -19,6 +20,7 @@ describe('initializer', function() {
             { args : ['', '', '', '', ''], valid : false },
             { args : ['', '', 'new'], valid : false },
             { args : ['', '', 'build', ''], valid : false },
+            { args : ['', '', 'run-local', ''], valid : false },
             { args : ['', '', 'publish', ''], valid : false }
         ];
 

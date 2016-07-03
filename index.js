@@ -3,6 +3,9 @@ var initializer = require("./lib/initializer");
 var fs = require('fs');
 var path = require('path');
 var Q = require('q');
+var express = require('express');
+var opener = require('opener');
+var serveStatic = require('serve-static');
 
 exports.init = function() {
 
@@ -16,6 +19,10 @@ exports.init = function() {
 
     case constants.ARG_BUILD:
       build();
+      break;
+
+    case constants.ARG_RUN_LOCAL:
+      runLocal();
       break;
 
     case constants.ARG_PUBLISH:
@@ -41,14 +48,7 @@ function createNew(name) {
 
 function build() {
 
-  try {
-    // check if index.html exist - if not, throws error
-    // that's a fast check to verify if we are in the correct folder
-    fs.accessSync(constants.FILE_NAME_HTML_INDEX, fs.F_OK);
-  } catch (e) {
-    console.log(constants.MSG_ERROR_INDEX_NOT_FOUND);
-    return;
-  }
+  checkIfFolderIsCorrect();
 
   // Create Promises
   var markdown = Q.denodeify(require("./lib/markdowner").markdown);
@@ -92,7 +92,22 @@ function build() {
     });
 }
 
+function runLocal() {
+
+  checkIfFolderIsCorrect();
+
+  var app = express();
+  app.use(serveStatic('.'));
+  app.listen(constants.RUN_LOCAL_PORT);
+
+  console.log(constants.MSG_DEBUG_RUNNING_LOCAL);
+
+  opener('http://localhost:' + constants.RUN_LOCAL_PORT);
+}
+
 function publish() {
+
+  checkIfFolderIsCorrect();
 
   var uploader = require("./lib/s3-uploader");
 
@@ -109,4 +124,15 @@ function publish() {
 
     console.log(constants.MSG_DEBUG_FINISHED_PUBLISH);
   });
+}
+
+function checkIfFolderIsCorrect() {
+  try {
+    // check if index.html exist - if not, throws error
+    // that's a fast check to verify if we are in the correct folder
+    fs.accessSync(constants.FILE_NAME_HTML_INDEX, fs.F_OK);
+  } catch (e) {
+    console.log(constants.MSG_ERROR_INDEX_NOT_FOUND);
+    return;
+  }
 }

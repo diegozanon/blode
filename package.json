@@ -1,6 +1,6 @@
 {
   "name": "static-blode",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A simple Node.js application to create static blogs.",
   "main": "index.js",
   "scripts": {
@@ -30,11 +30,14 @@
   "dependencies": {
     "aws-sdk": "^2.2.26",
     "clean-css": "^3.4.12",
+    "express": "^4.14.0",
     "jade": "^1.11.0",
     "marked": "^0.3.5",
     "moment": "^2.10.6",
     "ncp": "^2.0.0",
+    "opener": "^1.4.1",
     "q": "^1.4.1",
+    "serve-static": "^1.11.1",
     "uglify-js": "^2.6.2"
   },
   "bin": {

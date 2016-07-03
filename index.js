@@ -48,7 +48,9 @@ function createNew(name) {
 
 function build() {
 
-  checkIfFolderIsCorrect();
+  var err = checkIfFolderIsCorrect();
+  if (err)
+    throw err;
 
   // Create Promises
   var markdown = Q.denodeify(require("./lib/markdowner").markdown);
@@ -94,7 +96,9 @@ function build() {
 
 function runLocal() {
 
-  checkIfFolderIsCorrect();
+  var err = checkIfFolderIsCorrect();
+  if (err)
+    throw err;
 
   var app = express();
   app.use(serveStatic('.'));
@@ -107,7 +111,9 @@ function runLocal() {
 
 function publish() {
 
-  checkIfFolderIsCorrect();
+  var err = checkIfFolderIsCorrect();
+  if (err)
+    throw err;
 
   var uploader = require("./lib/s3-uploader");
 
@@ -132,6 +138,6 @@ function checkIfFolderIsCorrect() {
     // that's a fast check to verify if we are in the correct folder
     fs.accessSync(constants.FILE_NAME_HTML_INDEX, fs.F_OK);
   } catch (e) {
-    throw constants.MSG_ERROR_INDEX_NOT_FOUND;
+    return constants.MSG_ERROR_INDEX_NOT_FOUND;
   }
 }

@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en" ng-app="exampleApp" class="ng-scope"><head><style type="text/css">.ng-animate.item:not(.left):not(.right){-webkit-transition:0s ease-in-out left;transition:0s ease-in-out left}</style><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak-invalid,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+<!DOCTYPE html>
+<html lang="en" ng-app="exampleApp">
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,7 +10,7 @@
 
     <title>www.example.com</title>
 
-    <script src="/js/ng-cloak.js"></script><style type="text/css">.ng-cloak-invalid { display: none !important; }</style> <!-- workaround to avoid flickering in prerendered content -->
+    <script src="/js/ng-cloak.js"></script> <!-- workaround to avoid flickering in prerendered content -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/monokai_sublime.min.css">
     <link rel="stylesheet" href="/css/site.css">
@@ -21,7 +23,7 @@
 
     <base href="/">
   </head>
-  <body ng-controller="MainController" class="ng-scope">
+  <body ng-controller="MainController">
 
     <header>
       <div>
@@ -52,7 +54,7 @@
       <div class="container">
         <nav id="nav" class="navbar-inverse navbar-static-top">
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="navbar" aria-expanded="false" aria-controls="navbar">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-controls="navbar">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
@@ -61,9 +63,9 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li ng-class="{ 'active': active.all }" class="active">  <a ng-click="filter('all');" href="/">All posts</a></li>
-              <li ng-class="{ 'active': active.tag1 }"> <a ng-click="filter('tag1');" href="/">Tag1</a></li>
-              <li ng-class="{ 'active': active.tag2 }"> <a ng-click="filter('tag2');" href="/">Tag2</a></li>
+              <li ng-class="{ 'active': active.all }">  <a ng-click="filter('all');"    href="/">All posts</a></li>
+              <li ng-class="{ 'active': active.tag1 }"> <a ng-click="filter('tag1');"   href="/">Tag1</a></li>
+              <li ng-class="{ 'active': active.tag2 }"> <a ng-click="filter('tag2');"   href="/">Tag2</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </nav>
@@ -72,8 +74,9 @@
 
     <div class="container">
       <div class="content">
-        <!-- ngView:  --><div class="ng-view-background ng-scope ng-cloak" autoscroll="true" ng-view="" highlight-code="">
-<div ng-controller="PostsController" class="ng-scope">
+        <div class="ng-cloak" autoscroll="true" ng-view highlight-code>
+          
+<div ng-controller="PostsController" class="post-list">
   <div ng-show="active.all || active.tag1 || active.tag2" class="row">
     <div class="col-md-offset-1 col-md-10">
       <article>
@@ -96,7 +99,8 @@
     </div>
   </div>
   <div class="row"></div>
-</div></div>
+</div>
+        </div>
       </div>
     </div>
 
@@ -115,6 +119,5 @@
     <script src="/js/directives.js"></script>
     <script src="/js/routes.js"></script>
 
-  
-
-</body></html>
+  </body>
+</html>

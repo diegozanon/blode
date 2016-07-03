@@ -12,14 +12,14 @@ describe('initializer', function() {
         var tests = [
             { args : ['', '', 'new', 'my-blog'], valid : true, result: { name: constants.ARG_NEW, arg: 'my-blog' } },
             { args : ['', '', 'build'], valid : true, result: { name: constants.ARG_BUILD } },
-            { args : ['', '', 'deploy'], valid : true, result: { name: constants.ARG_DEPLOY } },
+            { args : ['', '', 'publish'], valid : true, result: { name: constants.ARG_PUBLISH } },
             { args : ['', ''], valid : false },
             { args : ['', '', ''], valid : false },
             { args : ['', '', '', ''], valid : false },
             { args : ['', '', '', '', ''], valid : false },
             { args : ['', '', 'new'], valid : false },
             { args : ['', '', 'build', ''], valid : false },
-            { args : ['', '', 'deploy', ''], valid : false }
+            { args : ['', '', 'publish', ''], valid : false }
         ];
 
         tests.forEach(function(test) {

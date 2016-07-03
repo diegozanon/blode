@@ -10,12 +10,12 @@ blode is a simple Node.js application to create static blogs. I've designed it t
 > blode new my-blog-folder
 > cd my-blog-folder
 > blode build
-> blode deploy
+> blode publish
 ```
 
 ## How does it work?
 
-The Node.js application reads the blog posts written with the [Markdown](http://daringfireball.net/projects/markdown/) syntax and compile them to HTML. It also minifies CSS, JS, pre-render pages to improve SEO and gzip contents before uploading to Amazon S3. If you don't want to host on AWS, you can deploy manually to another service.
+The Node.js application reads the blog posts written with the [Markdown](http://daringfireball.net/projects/markdown/) syntax and compile them to HTML. It also minifies CSS, JS, pre-render pages to improve SEO and gzip contents before uploading to Amazon S3. If you don't want to host on AWS, you can publish manually to another service.
 
 ## Why a static site generator and not Wordpress?
 You can use [Jekyll](http://jekyllrb.com/) or [another](http://www.sitepoint.com/6-static-blog-generators-arent-jekyll/) static website generator, but please, don't use Wordpress for blogging! Static websites don't need a dedicated server neither a database. A serverless blog means an extremely fast and cheap website. Also, you don't need to worry about security and server updates. You can read more reasons [here](http://www.sitepoint.com/wordpress-vs-jekyll-might-want-make-switch/).
@@ -57,7 +57,7 @@ The following command will render all markdown files, update the sitemap, RSS an
 
 ### Configuration
 
-If you want to deploy your blog on Amazon S3, you need to modify the config.json file that is located at the root level of your blog folder. Fill the following properties:
+If you want to publish your blog on Amazon S3, you need to modify the config.json file that is located at the root level of your blog folder. Fill the following properties:
 
 ```json
 {
@@ -72,11 +72,11 @@ The only mandatory option is the **awsBucketName** (that must match your domain 
 
 For a tutorial on how to host a static blog in Amazon S3, you can read [here](http://docs.aws.amazon.com/gettingstarted/latest/swh/website-hosting-intro.html).
 
-### Deploy
+### Publish
 
-Deploy is done to AWS S3 using:
+Publish is done to AWS S3 using:
 ```
-> blode deploy
+> blode publish
 ```
 
 ## Blog posts

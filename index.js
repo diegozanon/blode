@@ -1,5 +1,6 @@
 var constants = require("./lib/constants");
 var initializer = require("./lib/initializer");
+var fs = require('fs');
 var path = require('path');
 var Q = require('q');
 
@@ -17,8 +18,8 @@ exports.init = function() {
       build();
       break;
 
-    case constants.ARG_DEPLOY:
-      deploy();
+    case constants.ARG_PUBLISH:
+      publish();
       break;
 
     default:
@@ -39,6 +40,15 @@ function createNew(name) {
 }
 
 function build() {
+
+  try {
+    // check if index.html exist - if not, throws error
+    // that's a fast check to verify if we are in the correct folder
+    fs.accessSync(constants.FILE_NAME_HTML_INDEX, fs.F_OK);
+  } catch (e) {
+    console.log(constants.MSG_ERROR_INDEX_NOT_FOUND);
+    return;
+  }
 
   // Create Promises
   var markdown = Q.denodeify(require("./lib/markdowner").markdown);
@@ -82,7 +92,7 @@ function build() {
     });
 }
 
-function deploy() {
+function publish() {
 
   var uploader = require("./lib/s3-uploader");
 
@@ -97,6 +107,6 @@ function deploy() {
     if (err)
       throw err;
 
-    console.log(constants.MSG_DEBUG_FINISHED_DEPLOY);
+    console.log(constants.MSG_DEBUG_FINISHED_PUBLISH);
   });
 }

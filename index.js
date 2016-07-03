@@ -132,6 +132,6 @@ function checkIfFolderIsCorrect() {
     // that's a fast check to verify if we are in the correct folder
     fs.accessSync(constants.FILE_NAME_HTML_INDEX, fs.F_OK);
   } catch (e) {
-    throw console.log(constants.MSG_ERROR_INDEX_NOT_FOUND);
+    throw constants.MSG_ERROR_INDEX_NOT_FOUND;
   }
 }

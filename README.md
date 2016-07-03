@@ -6,10 +6,22 @@ blode is a simple Node.js application to create static blogs. I've designed it t
 ## Quick Start
 
 ```
+# install
 > npm install static-blode -g
+
+# create sample blog
 > blode new my-blog-folder
+
+# change to the new directory
 > cd my-blog-folder
+
+# build the blog files
 > blode build
+
+# watch the blog running at localhost:3000
+> blode run-local
+
+# publish to Amazon S3
 > blode publish
 ```
 
@@ -71,6 +83,13 @@ If you want to publish your blog on Amazon S3, you need to modify the config.jso
 The only mandatory option is the **awsBucketName** (that must match your domain name). The rest of the settings can be configured with shared files or environment variables (more [here](http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/node-configuring.html)).
 
 For a tutorial on how to host a static blog in Amazon S3, you can read [here](http://docs.aws.amazon.com/gettingstarted/latest/swh/website-hosting-intro.html).
+
+### Test
+
+Test the blog and watch it running at localhost:3000
+```
+> blode run-local
+```
 
 ### Publish
 

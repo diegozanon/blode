@@ -5,3 +5,5 @@ div(class="row post-container")
         div
           = '\n\n'
           != post.content
+
+          a(share-twitter data-text='"' + post.title + '"' data-url="http://myblog.com/posts/" + post.url data-via="my_twitter_handle" data-size="large")
